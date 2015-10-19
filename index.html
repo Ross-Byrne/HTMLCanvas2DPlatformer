@@ -21,26 +21,41 @@
 	 
 	 
 	 <!--/////////////////// JavaScript Scripts ///////////////////-->
-	 
-	 <script type="text/javascript" src="js/main.js"></script>
+	
 	 <script type="text/javascript" src="js/game.js"></script>
+	 <script type="text/javascript" src="js/main.js"></script>
 	 
 	 
 	 <!--/////////////////// JavaScript Section To Start Game ///////////////////-->
 	 
 	 <script type="text/javascript">
-	 		
-		// Function to get the game started
 		
+		/////////////////// Set Up ///////////////////
+		
+		// managing myNameSpace
+		window.myNameSpace = window.myNameSpace || { };
+		
+		// creating an instance of GameObject
+		var mainObject = new myNameSpace.MainObject();
+	 		
+		
+		/////////////////// Functions ///////////////////
+		
+		// Function to get the game started
 		function init(){
 		   
-		   console.log("Testing Testing");
+		   console.log("Testing Index.html Testing");
+		   
+		   mainObject.main();
 		   
 		} // init()
 		
 		
+		/////////////////// Running Code ///////////////////
+		
 		// Start the game
 		init();
+		
 	 
 	 </script>
 	 	
