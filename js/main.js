@@ -8,10 +8,15 @@ window.myNameSpace = window.myNameSpace || { };
 myNameSpace.main = function main() {
 	
 	// Gets a handle to the element with id gameCanvas.
-	var canvas = document.getElementById("gameCanvas");
+	myNameSpace.canvas = document.getElementById("gameCanvas");
+	
+	var canvas = myNameSpace.canvas;
 
 	// Get a 2D context for the canvas.
 	var ctx = canvas.getContext("2d");
+	
+	// get a reference to div
+	var theDiv = document.getElementById("theDiv");
 	
 	// set the width and height of the canvas
 	canvas.width = 800;
@@ -22,13 +27,56 @@ myNameSpace.main = function main() {
 	
 	// Initalise Variables
 
-	//var gravity = 0.1;
-
-
-
-	console.log("This is main!");
+	// hide canvas by default
+	canvas.style.display = "none";
+	
+	// show div by default
+	theDiv.style.display = "block";
+	
+	theDiv.style.textAlign = "Center";
+	
+	// add a paragraph
+	
+	// create paragraph element
+	myNameSpace.para = document.createElement("p");
+	var para = myNameSpace.para;
+	
+	// create text node
+	var textNode = document.createTextNode("Welcome to Gambler's Gambit. This is currently a work in progress!");
+	
+	// add text to paragraph
+	para.appendChild(textNode);
+	para.style.textAlign = "center";
+	
+	// add paragraph to div
+ 	theDiv.appendChild(para);
+	
+	myNameSpace.button = document.createElement("button");
+	
+	var button = myNameSpace.button;
+	
+	var t = document.createTextNode("Play Game!"); 
+	button.appendChild(t); 
+	button.style.textAlign = "center";
+	
+	// add attributes to button
+	button.setAttribute("id", "playButton");
+	button.setAttribute("onclick", "myNameSpace.playButtonClicked()");
+	
+	theDiv.appendChild(button);
 
 	// Start the game loop
 	gameEngine.update();
 
+
 }; // main()
+
+// function that is called when the playButton is clicked
+myNameSpace.playButtonClicked = function playButtonClicked(){
+   alert("Lets play the game!");
+	
+	// hide paragraph
+	myNameSpace.para.style.display = "none";
+	myNameSpace.button.style.display = "none";
+	myNameSpace.canvas.style.display = "block";
+};
