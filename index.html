@@ -7,9 +7,12 @@
 	  <title>2D Platformer</title>
 
 	  <style type="text/css">
-	  	canvas {
-		   border: 5px solid black; 
-      	}
+		  canvas {
+			  border: 5px solid black; 
+			  padding: 0;
+			  margin: auto;
+			  display: block;
+		  }
 	  </style>
 
   </head>
@@ -33,10 +36,7 @@
 		/////////////////// Set Up ///////////////////
 		
 		// managing myNameSpace
-		window.myNameSpace = window.myNameSpace || { };
-		
-		// creating an instance of GameObject
-		var mainObject = new myNameSpace.MainObject();
+		window.myNameSpace = window.myNameSpace || { }
 	 		
 		
 		/////////////////// Functions ///////////////////
@@ -44,9 +44,7 @@
 		// Function to get the game started
 		function init(){
 		   
-		   console.log("Testing Index.html Testing");
-		   
-		   mainObject.main();
+		   myNameSpace.main();
 		   
 		} // init()
 		

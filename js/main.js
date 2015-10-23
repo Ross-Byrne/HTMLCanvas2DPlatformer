@@ -4,18 +4,31 @@
 // Setting it up, equals window(the open browser window).myNameSpace to itself if it's there or an empty object if it isn't
 window.myNameSpace = window.myNameSpace || { };
 
-// Adds the MainObject object to myNameSpace
-myNameSpace.MainObject = function(){
+// the games main function. This is the first function to run
+myNameSpace.main = function main() {
+	
+	// Gets a handle to the element with id gameCanvas.
+	var canvas = document.getElementById("gameCanvas");
 
-   // main function that runs the game
-   this.main = function() {
-   
-	  var gameObject = new myNameSpace.GameObject();
-   
-	  console.log("This is main!");
-	  
-	  gameObject.printStuff();
-	  
-   }; // main()
-   
-}; // MainObject()
+	// Get a 2D context for the canvas.
+	var ctx = canvas.getContext("2d");
+	
+	// set the width and height of the canvas
+	canvas.width = 800;
+	canvas.height = 600;
+
+	// initialise a new game engine object
+	var gameEngine = new myNameSpace.Engine();
+	
+	// Initalise Variables
+
+	//var gravity = 0.1;
+
+
+
+	console.log("This is main!");
+
+	// Start the game loop
+	gameEngine.update();
+
+}; // main()
