@@ -20,7 +20,7 @@ myNameSpace.startPage.gameHeading = null;
 // takes the div that the page is going to be put in as a param
 myNameSpace.startPage.init = function init(startingDiv){
 	
-	myNameSpace.startPage.gameHeading = myNameSpace.pageCreationTools.createHTMLElement("h1", myNameSpace.startPage.headingText);
+	myNameSpace.startPage.gameHeading = myNameSpace.tools.createHTMLElement("h1", myNameSpace.startPage.headingText);
 	
 	// center the heading
 	myNameSpace.startPage.gameHeading.style.textAlign = "center";

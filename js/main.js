@@ -4,19 +4,24 @@
 // Setting it up, equals window(the open browser window).myNameSpace to itself if it's there or an empty object if it isn't
 window.myNameSpace = window.myNameSpace || { };
 
+
+////////////////////////////// main() //////////////////////////////
+
 // the games main function. This is the first function to run
 myNameSpace.main = function main() {
 	
 	// Gets a handle to the element with id gameCanvas.
 	myNameSpace.canvas = document.getElementById("gameCanvas");
-	
 	var canvas = myNameSpace.canvas;
 
 	// Get a 2D context for the canvas.
-	var ctx = canvas.getContext("2d");
+	myNameSpace.ctx = canvas.getContext("2d");
+	var ctx = myNameSpace.ctx;
 	
 	// get a reference to div
-	var theDiv = document.getElementById("theDiv");
+	myNameSpace.theDiv = document.getElementById("theDiv");
+	
+	var theDiv = myNameSpace.theDiv;
 	
 	// set the width and height of the canvas
 	canvas.width = 800;
@@ -24,6 +29,8 @@ myNameSpace.main = function main() {
 
 	// initialise a new game engine object
 	var gameEngine = new myNameSpace.Engine();
+	
+	myNameSpace.rec = new myNameSpace.gameObjects.Rectangle();
 	
 	// Initalise Variables
 
@@ -50,7 +57,7 @@ myNameSpace.main = function main() {
 	// add text to paragraph
 	para.appendChild(textNode);*/
 	
-	myNameSpace.para = myNameSpace.pageCreationTools.createHTMLElement("p", "Welcome to Gambler's Gambit. This is currently a work in progress!");
+	myNameSpace.para = myNameSpace.tools.createHTMLElement("p", "Welcome to Gambler's Gambit. This is currently a work in progress!");
 
 	var para = myNameSpace.para;
 	
@@ -68,23 +75,55 @@ myNameSpace.main = function main() {
 	button.style.textAlign = "center";
 	
 	// add attributes to button
-	button.setAttribute("id", "playButton");
-	button.setAttribute("onclick", "myNameSpace.playButtonClicked()");
+	
+	// add id to button
+	myNameSpace.tools.addAttribute(button, "id", "playButton");
+	//button.setAttribute("id", "playButton");
+	
+	// add an onclick function to button
+	myNameSpace.tools.addAttribute(button, "onclick", "myNameSpace.playButtonClicked()");
+	//button.setAttribute("onclick", "myNameSpace.playButtonClicked()");
 	
 	theDiv.appendChild(button);
 
 	// Start the game loop
 	gameEngine.update();
 
-
 }; // main()
+
+
+////////////////////////////// playButtonClicked() //////////////////////////////
 
 // function that is called when the playButton is clicked
 myNameSpace.playButtonClicked = function playButtonClicked(){
-   alert("Lets play the game!");
 	
 	// hide paragraph
 	myNameSpace.para.style.display = "none";
 	myNameSpace.button.style.display = "none";
 	myNameSpace.canvas.style.display = "block";
 };
+
+
+////////////////////////////// gameOperations() //////////////////////////////
+
+// gameOperations runs the actual game code that needs to run every frame
+// such as animations, collisions etc.
+
+// it is clearer to keep the game code separate from the function
+// that controls the game loop
+myNameSpace.gameOperations = function gameOperations(){
+	
+	// clear the canvas so the object can be redrawn
+	myNameSpace.ctx.clearRect(0, 0, myNameSpace.canvas.width, myNameSpace.canvas.height);
+	
+	myNameSpace.rec.draw();
+	
+	var parentEl;
+	
+	// get the parent of theDiv
+	parentEl = myNameSpace.theDiv.parentElement;
+	
+	// insert theDiv before the canvas element
+	parentEl.insertBefore(myNameSpace.theDiv, myNameSpace.canvas);
+	
+}; // gameOperations()

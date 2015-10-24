@@ -3,20 +3,6 @@
 // window.myNameSpace is my global object that I can add all of my functions too.
 // Setting it up, equals window(the open browser window).myNameSpace to itself if it's there or an empty object if it isn't
 window.myNameSpace = window.myNameSpace || { };
-   
-
-////////////////////////////// GameOperations() //////////////////////////////
-
-// gameOperations runs the actual game code that needs to run every frame
-// such as animations, collisions etc.
-
-// it is clearer to keep the game code separate from the function
-// that controls the game loop
-myNameSpace.gameOperations = function gameOperations(){
-	
-	// Game Code
-	
-}; // gameOperations()
 	
 	
 ////////////////////////////// Engine Object //////////////////////////////

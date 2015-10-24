@@ -6,11 +6,14 @@
 window.myNameSpace = window.myNameSpace || { };
 
 // add pageCreationsTools to namespace
-window.myNameSpace.pageCreationTools = { };
+window.myNameSpace.tools = { };
+
+
+////////////////////////////// createHTMLElement() //////////////////////////////
 
 // creates a HTML element that is specified eg "p" = paragraph, "button" = button and text adds the text
 // returns the created element
-myNameSpace.pageCreationTools.createHTMLElement = function createHTMLElement(elementType, text){
+myNameSpace.tools.createHTMLElement = function createHTMLElement(elementType, text){
 	
 	var element;
 	
@@ -27,3 +30,14 @@ myNameSpace.pageCreationTools.createHTMLElement = function createHTMLElement(ele
 	return element;
 	
 }; // createHTMLElement()
+
+
+////////////////////////////// addAttribute() //////////////////////////////
+
+// Adds an attribute to a HTML element
+myNameSpace.tools.addAttribute = function addAttribute(element, attribute, attributeValue){
+	
+	// adds an attribute to a HTML element
+	element.setAttribute(attribute, attributeValue);
+	
+}; // addAttribute()
