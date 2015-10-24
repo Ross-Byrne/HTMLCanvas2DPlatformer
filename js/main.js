@@ -35,17 +35,25 @@ myNameSpace.main = function main() {
 	
 	theDiv.style.textAlign = "Center";
 	
+	// initialise the games start page
+	myNameSpace.startPage.init(theDiv);
+	
 	// add a paragraph
 	
 	// create paragraph element
-	myNameSpace.para = document.createElement("p");
+	/*myNameSpace.para = document.createElement("p");
 	var para = myNameSpace.para;
 	
 	// create text node
 	var textNode = document.createTextNode("Welcome to Gambler's Gambit. This is currently a work in progress!");
 	
 	// add text to paragraph
-	para.appendChild(textNode);
+	para.appendChild(textNode);*/
+	
+	myNameSpace.para = myNameSpace.pageCreationTools.createHTMLElement("p", "Welcome to Gambler's Gambit. This is currently a work in progress!");
+
+	var para = myNameSpace.para;
+	
 	para.style.textAlign = "center";
 	
 	// add paragraph to div
