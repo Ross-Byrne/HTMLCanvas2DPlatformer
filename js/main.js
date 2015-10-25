@@ -31,8 +31,6 @@ myNameSpace.main = function main() {
 	var gameEngine = new myNameSpace.Engine();
 	myNameSpace.gameEngine = gameEngine;
 	
-	myNameSpace.rec = new myNameSpace.gameObjects.Rectangle();
-	
 	// Initalise Variables
 
 	// hide canvas by default
@@ -43,7 +41,7 @@ myNameSpace.main = function main() {
 	
 	// center the divs contents
 	theDiv.style.textAlign = "Center";
-	
+
 	
 	// Running Setup Functions
 	
@@ -65,7 +63,7 @@ myNameSpace.gameOperations = function gameOperations(){
 	// clear the canvas so the object can be redrawn
 	myNameSpace.ctx.clearRect(0, 0, myNameSpace.canvas.width, myNameSpace.canvas.height);
 	
-	// draw rect
-	myNameSpace.rec.draw();
+	// draw the level
+	myNameSpace.levelOne.drawLevel();
 	
 }; // gameOperations()

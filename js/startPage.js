@@ -98,6 +98,9 @@ myNameSpace.startPage.startButtonClicked = function startButtonClicked(){
 	// insert theDiv before the canvas element
 	parentEl.insertBefore(myNameSpace.theDiv, myNameSpace.canvas);
 	
+	// setup first level
+	myNameSpace.levelOne.setUpLevel();
+	
 	// Start the game loop
 	myNameSpace.gameEngine.update();
 	
