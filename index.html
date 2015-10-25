@@ -6,18 +6,10 @@
 		<meta charset="UTF-8">
 		<title>2D Platformer</title>
 
-		<style type="text/css">
-			canvas {
-				border: 1px solid black; 
-			  	padding: 0;
-				margin: 3%;
-				margin-left: auto;
-				margin-right: auto;
-				margin-bottom: auto;
-			  	display: block;
-			}
-		</style>
-
+		<!--/////////////////// CSS Files ///////////////////-->
+		
+		<link rel="stylesheet" type="text/css" href="css/gameStyleSheet.css">
+		
 	</head>
 	<body>
 	 
@@ -29,9 +21,9 @@
 		<!--/////////////////// Div Element ///////////////////-->
 		
 		<div id="theDiv"></div>
-	 
-	 
-		<!--/////////////////// JavaScript Scripts ///////////////////-->
+		
+		
+		<!--/////////////////// JavaScript Files ///////////////////-->
 	
 		<script type="text/javascript" src="js/tools.js"></script>
 		<script type="text/javascript" src="js/startPage.js"></script>
@@ -45,26 +37,15 @@
 	 
 		<script type="text/javascript">
 		
-		/////////////////// Set Up ///////////////////
+			/////////////////// Set Up ///////////////////
 		
-		// managing myNameSpace
-		window.myNameSpace = window.myNameSpace || { }
-	 		
-		
-		/////////////////// Functions ///////////////////
-		
-		// Function to get the game started
-		function init(){
-		   
-		   myNameSpace.main();
-		   
-		} // init()
-		
-		
-		/////////////////// Running Code ///////////////////
-		
-		// Start the game
-		init();
+			// managing myNameSpace
+			window.myNameSpace = window.myNameSpace || { }
+	 	
+			
+			// The main function that will start the game
+			// run main()
+			myNameSpace.main();
 		
 		</script>
 	 	

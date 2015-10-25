@@ -29,6 +29,7 @@ myNameSpace.main = function main() {
 
 	// initialise a new game engine object
 	var gameEngine = new myNameSpace.Engine();
+	myNameSpace.gameEngine = gameEngine;
 	
 	myNameSpace.rec = new myNameSpace.gameObjects.Rectangle();
 	
@@ -40,68 +41,16 @@ myNameSpace.main = function main() {
 	// show div by default
 	theDiv.style.display = "block";
 	
+	// center the divs contents
 	theDiv.style.textAlign = "Center";
+	
+	
+	// Running Setup Functions
 	
 	// initialise the games start page
 	myNameSpace.startPage.init(theDiv);
-	
-	// add a paragraph
-	
-	// create paragraph element
-	/*myNameSpace.para = document.createElement("p");
-	var para = myNameSpace.para;
-	
-	// create text node
-	var textNode = document.createTextNode("Welcome to Gambler's Gambit. This is currently a work in progress!");
-	
-	// add text to paragraph
-	para.appendChild(textNode);*/
-	
-	myNameSpace.para = myNameSpace.tools.createHTMLElement("p", "Welcome to Gambler's Gambit. This is currently a work in progress!");
-
-	var para = myNameSpace.para;
-	
-	para.style.textAlign = "center";
-	
-	// add paragraph to div
- 	theDiv.appendChild(para);
-	
-	myNameSpace.button = document.createElement("button");
-	
-	var button = myNameSpace.button;
-	
-	var t = document.createTextNode("Play Game!"); 
-	button.appendChild(t); 
-	button.style.textAlign = "center";
-	
-	// add attributes to button
-	
-	// add id to button
-	myNameSpace.tools.addAttribute(button, "id", "playButton");
-	//button.setAttribute("id", "playButton");
-	
-	// add an onclick function to button
-	myNameSpace.tools.addAttribute(button, "onclick", "myNameSpace.playButtonClicked()");
-	//button.setAttribute("onclick", "myNameSpace.playButtonClicked()");
-	
-	theDiv.appendChild(button);
-
-	// Start the game loop
-	gameEngine.update();
 
 }; // main()
-
-
-////////////////////////////// playButtonClicked() //////////////////////////////
-
-// function that is called when the playButton is clicked
-myNameSpace.playButtonClicked = function playButtonClicked(){
-	
-	// hide paragraph
-	myNameSpace.para.style.display = "none";
-	myNameSpace.button.style.display = "none";
-	myNameSpace.canvas.style.display = "block";
-};
 
 
 ////////////////////////////// gameOperations() //////////////////////////////
@@ -116,14 +65,7 @@ myNameSpace.gameOperations = function gameOperations(){
 	// clear the canvas so the object can be redrawn
 	myNameSpace.ctx.clearRect(0, 0, myNameSpace.canvas.width, myNameSpace.canvas.height);
 	
+	// draw rect
 	myNameSpace.rec.draw();
-	
-	var parentEl;
-	
-	// get the parent of theDiv
-	parentEl = myNameSpace.theDiv.parentElement;
-	
-	// insert theDiv before the canvas element
-	parentEl.insertBefore(myNameSpace.theDiv, myNameSpace.canvas);
 	
 }; // gameOperations()
