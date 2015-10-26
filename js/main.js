@@ -31,6 +31,13 @@ myNameSpace.main = function main() {
 	var gameEngine = new myNameSpace.Engine();
 	myNameSpace.gameEngine = gameEngine;
 	
+	var thePlayer = new myNameSpace.player();
+	myNameSpace.thePlayer = thePlayer;
+	
+	//set the players x and y position
+	thePlayer.position.x = 50;
+	thePlayer.position.y = 50;
+	
 	// Initalise Variables
 
 	// hide canvas by default
@@ -65,5 +72,8 @@ myNameSpace.gameOperations = function gameOperations(){
 	
 	// draw the level
 	myNameSpace.levelOne.drawLevel();
+	
+	// draw the player 
+	myNameSpace.thePlayer.draw();
 	
 }; // gameOperations()
