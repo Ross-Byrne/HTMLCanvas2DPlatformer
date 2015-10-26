@@ -20,6 +20,20 @@ myNameSpace.gameObjects.Rectangle = function Rectangle(){
 	this.height = 20;
 	this.colour = "rgb(0, 0, 0)";
 	this.tag = "default";
+	
+	
+	////////////////////////////// init() //////////////////////////////
+	
+	// initialises objects variables
+	this.init = function init(posx, posy, width, height, colour, tag){
+		
+		this.position = {x: posx, y: posy};
+		this.width = width;
+		this.height = height;
+		this.colour = colour;
+		this.tag = tag;
+		
+	}; // init()
 
 	
 	////////////////////////////// draw() //////////////////////////////
@@ -71,6 +85,21 @@ myNameSpace.gameObjects.Circle = function Circle(){
 	this.acceleration = 0;
 	this.colour = "rgb(255, 0, 0)";
 	this.tag = "default";
+	
+	
+	////////////////////////////// init() //////////////////////////////
+	
+	// initialises objects variables
+	this.init = function init(r, posx, posy, velx, vely, a, colour, tag){
+		
+		this.radius =  r;
+		this.position = { x: posx, y: posy };
+		this.velocity = { x: velx, y: vely };
+		this.acceleration = a;
+		this.colour = colour;
+		this.tag = tag;
+		
+	}; // init()
 	
 	
 	////////////////////////////// draw() //////////////////////////////

@@ -22,29 +22,35 @@ myNameSpace.Engine = function Engine(){
 	this.lastTime = 0;
 	this.deltaTime = 0;
 	
+	
+	////////////////////////////// Functions //////////////////////////////
+	
+	
+	////////////////////////////// Update() //////////////////////////////
+
+	this.update = function update(timeStamp){
+		
+		// save the current time	
+		this.currentTime = this.timeStamp || 0;
+
+		// Calculate delta time
+		this.deltaTime = (this.currentTime - this.lastTime) / 1000;
+
+		// Run game code
+		myNameSpace.gameOperations();
+
+		// save the last time
+		this.lastTime = this.timeStamp || 0;
+
+		// Runs function every frame
+		window.requestAnimationFrame(update);
+
+	}; // update()
+	
 }; // Engine Object
 
 
-////////////////////////////// Update() //////////////////////////////
 
-myNameSpace.Engine.prototype.update = function update(timeStamp){
-		
-	// save the current time	
-	this.currentTime = this.timeStamp || 0;
-
-	// Calculate delta time
-	this.deltaTime = (this.currentTime - this.lastTime) / 1000;
-
-	// Run game code
-	myNameSpace.gameOperations();
-
-	// save the last time
-	this.lastTime = this.timeStamp || 0;
-
-	// Runs function every frame
-	window.requestAnimationFrame(update);
-
-}; // update()
 
 
 

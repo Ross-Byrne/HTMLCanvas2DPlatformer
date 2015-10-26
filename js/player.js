@@ -1,0 +1,41 @@
+// javascript file to hold all the player code
+
+// window.myNameSpace is my global object that I can add all of my functions too.
+// Setting it up, equals window(the open browser window).myNameSpace to itself if it's there or an empty object if it isn't
+window.myNameSpace = window.myNameSpace || { };
+
+// player object constructor
+window.myNameSpace.player = function player(){
+	
+	////////////////////////////// Variables //////////////////////////////
+	
+	this.position = { x: 0, y: 0 };
+	this.isAlive = true;
+	this.playerColour = { hat: "rgb(0, 0, 0)", head: "rgb(255, 255, 255)", body: "rgb(70, 0, 0)" };
+	this.score = 0;
+	this.lives = 0;
+	this.health = 4;
+	
+	
+	////////////////////////////// Functions //////////////////////////////
+	
+	
+	////////////////////////////// init() //////////////////////////////
+	
+	
+	////////////////////////////// draw() //////////////////////////////
+	
+	
+	////////////////////////////// createPlayer() //////////////////////////////
+	
+	
+	////////////////////////////// move() //////////////////////////////
+	
+	
+	////////////////////////////// jump() //////////////////////////////
+	
+	
+	////////////////////////////// attack() //////////////////////////////
+	
+}; // Player Object
+

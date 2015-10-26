@@ -13,6 +13,7 @@ window.myNameSpace.levelOne = { };
 
 myNameSpace.levelOne.floorObjects = [];
 
+
 ////////////////////////////// setUpLevel() //////////////////////////////
 
 // setup function that sets up the level
@@ -50,31 +51,24 @@ myNameSpace.levelOne.drawLevel = function drawLevel(){
 
 // creates the objects that will act as the floors of the level
 myNameSpace.levelOne.createFloorLayout = function createFloorLayout(){
-	
+
 	// create rectangle object
-	myNameSpace.levelOne.groundLevel = new myNameSpace.gameObjects.Rectangle();
-	var groundLevel = myNameSpace.levelOne.groundLevel;
-	
-	// set its colour to gray
-	groundLevel.colour = "rgb(70, 70, 70)";
+	myNameSpace.levelOne.groundLevelFloor = new myNameSpace.gameObjects.Rectangle();
+	var groundLevelFloor = myNameSpace.levelOne.groundLevelFloor;
 	
 	// set width to the width of the canvas
-	groundLevel.width = myNameSpace.canvas.width;
-	
-	// set the height to 30
-	groundLevel.height = 30;
-	
-	// set position x to 0
-	groundLevel.position.x = 0;
+	groundLevelFloor.width = myNameSpace.canvas.width;
+	groundLevelFloor.height = 30;
 	
 	// set position y to the bottom of canvas - the height of object so it's on the bottom of canvas
-	groundLevel.position.y = myNameSpace.canvas.height - groundLevel.height;
-	
-	// set its tag to floor
-	groundLevel.tag = "floor";
+	groundLevelFloor.position.y = myNameSpace.canvas.height - groundLevelFloor.height;
+	groundLevelFloor.position.x = 0;
+	groundLevelFloor.colour = "rgb(70, 70, 70)";
+	groundLevelFloor.tag = "floor";
 	
 	// add groundFloor to array of floor objects
-	myNameSpace.levelOne.floorObjects.push(groundLevel);
+	myNameSpace.levelOne.floorObjects.push(groundLevelFloor);
+	
 	
 	// create level part 1
 	var floorPart = new myNameSpace.gameObjects.Rectangle();
@@ -83,7 +77,7 @@ myNameSpace.levelOne.createFloorLayout = function createFloorLayout(){
 	floorPart.width = myNameSpace.canvas.width * .25; // 25% the width of the canvas
 	
 	floorPart.position.x = (myNameSpace.canvas.width * .6); // start drawing object 60% the length of the canvas from left side
-	floorPart.position.y = (myNameSpace.canvas.height - myNameSpace.levelOne.groundLevel.height) - floorPart.height;
+	floorPart.position.y = (myNameSpace.canvas.height - myNameSpace.levelOne.groundLevelFloor.height) - floorPart.height;
 	floorPart.colour = "rgb(70, 70, 70)";
 	floorPart.tag = "floor";
 	
@@ -112,7 +106,7 @@ myNameSpace.levelOne.createFloorLayout = function createFloorLayout(){
 myNameSpace.levelOne.createSecondFloorLevel = function createSecondFloorLevel(){
 	
 	// get current ground level
-	var curGroundLevel = myNameSpace.canvas.height - myNameSpace.levelOne.groundLevel.height;
+	var curGroundLevel = myNameSpace.canvas.height - myNameSpace.levelOne.groundLevelFloor.height;
 	
 	// create floor part
 	var secondFloorPart = new myNameSpace.gameObjects.Rectangle();
@@ -121,6 +115,7 @@ myNameSpace.levelOne.createSecondFloorLevel = function createSecondFloorLevel(){
 	secondFloorPart.height = 30;
 	secondFloorPart. width = myNameSpace.canvas.width * .65;
 	
+	// set properties
 	secondFloorPart.position.x = 0;
 	secondFloorPart.position.y = curGroundLevel - (myNameSpace.canvas.height * .2) - secondFloorPart.height;
 	secondFloorPart.colour = "rgb(70, 70, 70)";
@@ -128,5 +123,24 @@ myNameSpace.levelOne.createSecondFloorLevel = function createSecondFloorLevel(){
 	
 	// add floor part to the array of floor objects
 	myNameSpace.levelOne.floorObjects.push(secondFloorPart);
+	
+	// create another floor part
+	var secondFloorPart1 = new myNameSpace.gameObjects.Rectangle();
+	
+	secondFloorPart1.height = 30;
+	// width is whatever is left of the canvas width after secondFloorPart and the space between it asnd secondFloorPart1
+	secondFloorPart1. width = myNameSpace.canvas.width - secondFloorPart.width - (myNameSpace.canvas.width * .13);
+	
+	// set properties
+	
+	// start where secondFoorPart ends + a space of 13% the width of canvas
+	secondFloorPart1.position.x = secondFloorPart.width + (myNameSpace.canvas.width * .13);
+	// position y is equal to 20% above ground level - the height of floor
+	secondFloorPart1.position.y = curGroundLevel - (myNameSpace.canvas.height * .2) - secondFloorPart1.height;
+	secondFloorPart1.colour = "rgb(70, 70, 70)";
+	secondFloorPart1.tag = "floor";
+	
+	// add floor part to the array of floor objects
+	myNameSpace.levelOne.floorObjects.push(secondFloorPart1);
 	
 }; // createSecondFloorLevel()
