@@ -9,24 +9,27 @@ window.myNameSpace.player = function player(){
 	
 	////////////////////////////// Variables //////////////////////////////
 	
-	this.width = 30;
-	this.height = 60;
+	// the player seems to look best when there is a 2:1 ratio for height : width
+	
+	this.width = 20;
+	this.height = 40;
 	this.position = { x: 0, y: 0 };
 	this.isAlive = true;
-	this.playerColour = { hat: "rgb(0, 0, 0)", head: "rgb(255, 255, 255)", body: "rgb(70, 0, 0)" };
+	this.playerColour = { hat: "rgb(0, 0, 0)", head: "rgb(160, 200, 100)", body: "rgb(70, 0, 0)" };
 	this.score = 0;
 	this.lives = 0;
 	this.health = 4;
 	
 	// players hit box will be a rectangle so body parts are split 
-	// between alocated height and height
+	// between allocated height
+	
+	// player hat  gets 20% of height allocated
+	// player head gets 28% of height allocated
+	// player body gets 52% of height allocated
 
-	// player hat and head get 25% of size each
-	// player body gets 50% of size
-
-	this.hatSizePercent = .25;
-	this.headSizePercent = .25;
-	this.bodySizePercent = .5;
+	this.hatSizePercent = .20;
+	this.headSizePercent = .28;
+	this.bodySizePercent = .52;
 	
 	
 	////////////////////////////// Functions //////////////////////////////
@@ -47,14 +50,17 @@ window.myNameSpace.player = function player(){
 		// draw player if alive
 		if(this.isAlive){
 			
-			// draw players hat
-			this.drawHat();
-			
 			// draw players head
 			this.drawHead();
 			
+			// draw players hat
+			this.drawHat();
+			
 			// draw players body
 			this.drawBody();
+			
+			myNameSpace.ctx.fillRect(100, this.position.y, this.width, this.height);
+			
 		} // if
 		
 	}; // draw()
@@ -68,19 +74,20 @@ window.myNameSpace.player = function player(){
 		// reference
 		// fillRect(posX, posY, width, height)
 		
-		var hatWidth = this.width;
+		var hatWidth = this.width * .8;
 		var hatHeight = this.height * this.hatSizePercent;
-		var hatBodyIndent = this.width * .26; // hat body indent is how much smaller body is compared to rim of hat
+		var hatWidthOffSet = (this.width - hatWidth) / 2; // hat isn't as wide as allocated width, so this is the offset to be added to x axis
+		var hatBodyIndent = hatWidth * .28; // hat body indent is how much smaller body is compared to rim of hat
 		var hatRimHeight = hatHeight * .18; // height of the hat rim
 		
 		// set colour for hat
 		myNameSpace.ctx.fillStyle = this.playerColour.hat;
 
 		// draw hat part1 - hat body
-		myNameSpace.ctx.fillRect(this.position.x + (hatBodyIndent / 2), this.position.y, hatWidth - hatBodyIndent, hatHeight - hatRimHeight);
+		myNameSpace.ctx.fillRect(this.position.x + hatWidthOffSet + (hatBodyIndent / 2), this.position.y, hatWidth - hatBodyIndent, hatHeight - hatRimHeight);
 		
 		// draw hat part2 - hat rim
-		myNameSpace.ctx.fillRect(this.position.x, this.position.y + hatHeight - hatRimHeight, this.width, hatRimHeight);
+		myNameSpace.ctx.fillRect(this.position.x + hatWidthOffSet, this.position.y + hatHeight - hatRimHeight, hatWidth, hatRimHeight);
 		
 	}; // drawHat()
 	
@@ -90,6 +97,28 @@ window.myNameSpace.player = function player(){
 	// function that draws the players head
 	this.drawHead = function drawHead(){
 		
+		var headWidth = this.width;
+		var headHeight = this.height * this.headSizePercent;
+		var headRadius = headHeight / 2;
+		var headYStartingPoint = this.position.y + (this.height * this.hatSizePercent); // because head is drawn under hat
+		var headExtraSize = Math.min(headRadius * .2, headWidth / 2); // increase head size by 20% but not bigger then the max width given
+		
+		// add extra size onto the radius of the head
+		headRadius += headExtraSize;
+		
+		// set colour for head
+		myNameSpace.ctx.fillStyle = this.playerColour.head;
+			 
+		// start drawing circle
+		myNameSpace.ctx.beginPath();
+				
+		// draws circle 
+		myNameSpace.ctx.arc(this.position.x + (headWidth / 2), headYStartingPoint + headRadius - headExtraSize, headRadius, 0, 2 * Math.PI); 
+		
+		//myNameSpace.ctx.stroke();
+			 
+		// fill circles colour
+		myNameSpace.ctx.fill();
 		
 	}; // drawHead()
 	
@@ -99,7 +128,24 @@ window.myNameSpace.player = function player(){
 	// function that draws the players body
 	this.drawBody = function drawBody(){
 		
+		var bodyWidth = this.width;
+		var bodyHeight = this.height * this.bodySizePercent;
+		var bodyRadius = bodyHeight / 2;
+		var bodyYStartingPoint = this.position.y + (this.height * this.hatSizePercent) + (this.height * this.headSizePercent); // because body is drawn under head
 		
+		// set colour for head
+		myNameSpace.ctx.fillStyle = this.playerColour.body;
+			 
+		// start drawing circle
+		myNameSpace.ctx.beginPath();
+				
+		// draws circle 
+		myNameSpace.ctx.arc(this.position.x + (bodyWidth / 2), bodyYStartingPoint + bodyRadius, bodyRadius, 0, 2 * Math.PI); 
+		
+		//myNameSpace.ctx.stroke();
+			 
+		// fill circles colour
+		myNameSpace.ctx.fill();
 	}; // drawBody()
 	
 	
