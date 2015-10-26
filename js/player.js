@@ -11,9 +11,11 @@ window.myNameSpace.player = function player(){
 	
 	// the player seems to look best when there is a 2:1 ratio for height : width
 	
-	this.width = 20;
-	this.height = 40;
+	this.width = 25;
+	this.height = 45;
 	this.position = { x: 0, y: 0 };
+	this.velocity = { x: 0, y: 0 };
+	
 	this.isAlive = true;
 	this.playerColour = { hat: "rgb(0, 0, 0)", head: "rgb(160, 200, 100)", body: "rgb(70, 0, 0)" };
 	this.score = 0;
@@ -59,6 +61,7 @@ window.myNameSpace.player = function player(){
 			// draw players body
 			this.drawBody();
 			
+			// draw refrence rectangle 
 			myNameSpace.ctx.fillRect(100, this.position.y, this.width, this.height);
 			
 		} // if
@@ -75,9 +78,9 @@ window.myNameSpace.player = function player(){
 		// fillRect(posX, posY, width, height)
 		
 		var hatWidth = this.width * .8;
-		var hatHeight = this.height * this.hatSizePercent;
+		var hatHeight = this.height * this.hatSizePercent; // get height allocated for hat
 		var hatWidthOffSet = (this.width - hatWidth) / 2; // hat isn't as wide as allocated width, so this is the offset to be added to x axis
-		var hatBodyIndent = hatWidth * .28; // hat body indent is how much smaller body is compared to rim of hat
+		var hatBodyIndent = hatWidth * .36; // hat body indent is how much smaller body is compared to rim of hat
 		var hatRimHeight = hatHeight * .18; // height of the hat rim
 		
 		// set colour for hat
@@ -98,8 +101,8 @@ window.myNameSpace.player = function player(){
 	this.drawHead = function drawHead(){
 		
 		var headWidth = this.width;
-		var headHeight = this.height * this.headSizePercent;
-		var headRadius = headHeight / 2;
+		var headHeight = this.height * this.headSizePercent; // get allocated height for head
+		var headRadius = headHeight / 2; // radius is based on the amount of height allocated
 		var headYStartingPoint = this.position.y + (this.height * this.hatSizePercent); // because head is drawn under hat
 		var headExtraSize = Math.min(headRadius * .2, headWidth / 2); // increase head size by 20% but not bigger then the max width given
 		
@@ -114,8 +117,6 @@ window.myNameSpace.player = function player(){
 				
 		// draws circle 
 		myNameSpace.ctx.arc(this.position.x + (headWidth / 2), headYStartingPoint + headRadius - headExtraSize, headRadius, 0, 2 * Math.PI); 
-		
-		//myNameSpace.ctx.stroke();
 			 
 		// fill circles colour
 		myNameSpace.ctx.fill();
@@ -129,8 +130,8 @@ window.myNameSpace.player = function player(){
 	this.drawBody = function drawBody(){
 		
 		var bodyWidth = this.width;
-		var bodyHeight = this.height * this.bodySizePercent;
-		var bodyRadius = bodyHeight / 2;
+		var bodyHeight = this.height * this.bodySizePercent; // get allocated height for head
+		var bodyRadius = bodyHeight / 2; // radius is based on amount of height allocated
 		var bodyYStartingPoint = this.position.y + (this.height * this.hatSizePercent) + (this.height * this.headSizePercent); // because body is drawn under head
 		
 		// set colour for head
@@ -141,11 +142,10 @@ window.myNameSpace.player = function player(){
 				
 		// draws circle 
 		myNameSpace.ctx.arc(this.position.x + (bodyWidth / 2), bodyYStartingPoint + bodyRadius, bodyRadius, 0, 2 * Math.PI); 
-		
-		//myNameSpace.ctx.stroke();
 			 
 		// fill circles colour
 		myNameSpace.ctx.fill();
+		
 	}; // drawBody()
 	
 	
