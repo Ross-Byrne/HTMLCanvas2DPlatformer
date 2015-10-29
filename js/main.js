@@ -8,7 +8,7 @@ window.myNameSpace = window.myNameSpace || { };
 
 ////////////////////////////// Variables //////////////////////////////
 
-myNameSpace.gravity = 30;
+myNameSpace.gravity = 120;
 
 myNameSpace.currentTime = 0;
 myNameSpace.lastTime = 0;
@@ -81,6 +81,52 @@ myNameSpace.gameOperations = function gameOperations(){
 	myNameSpace.ctx.clearRect(0, 0, myNameSpace.canvas.width, myNameSpace.canvas.height);
 	
 	
+	////////////////////////////// Check Input //////////////////////////////
+	
+	// checks for user input
+	
+	      // Add an event listener to the keypress event.
+	window.addEventListener("keydown", function(event) { 
+		// Just log the event to the console.
+		//console.log(event);
+			
+		// if space 
+		if(event.keyCode == '32'){
+			
+			// make player jump
+			myNameSpace.thePlayer.jump();
+		}
+			
+		// if ArrowRight
+		if(event.keyCode == '39') {
+			
+			// move player right
+				
+		} // if
+		
+		// if ArrowLeft
+		if(event.keyCode == '37'){
+				
+				
+		} // if
+			
+		// if ArrowDown
+		if(event.keyCode == '40'){
+	
+			// climb down ladder if over one
+				
+		} // if
+		
+		// if ArrowUp
+		if(event.keyCode == '38'){ 
+			
+			// climb ladder if under one
+			
+		} // if
+										
+	}); // addEventListener()
+	
+	
 	////////////////////////////// Update State //////////////////////////////
 	
 	// updates the positions and state of objects
@@ -92,6 +138,16 @@ myNameSpace.gameOperations = function gameOperations(){
 	////////////////////////////// Check Collisions //////////////////////////////
 	
 	// checks collisions and runs required code
+	
+	// check if player is colliding with the floor
+	var len = myNameSpace.levelOne.floorObjects.length;
+	
+	for(var i = 0; i < len; ++i){
+		
+		// check collisions with floor objects
+		myNameSpace.thePlayer.collidingWithFloor(myNameSpace.levelOne.floorObjects[i]);
+		
+	} // for
 	
 	
 	////////////////////////////// Render Objects //////////////////////////////

@@ -22,6 +22,8 @@ window.myNameSpace.player = function player(){
 	this.lives = 0;
 	this.health = 4;
 	
+	this.isJumping = false;
+	
 	// players hit box will be a rectangle so body parts are split 
 	// between allocated height
 	
@@ -32,6 +34,12 @@ window.myNameSpace.player = function player(){
 	this.hatSizePercent = .20;
 	this.headSizePercent = .28;
 	this.bodySizePercent = .52;
+	
+	
+	// Player body parts
+	
+	this.playerHead = new myNameSpace.gameObjects.Circle();
+	this.playerBody = new myNameSpace.gameObjects.Circle();
 	
 	
 	////////////////////////////// Functions //////////////////////////////
@@ -74,10 +82,27 @@ window.myNameSpace.player = function player(){
 	// function that updates the state of the player
 	this.update = function update(){
 		
+		var jumpDecaySpeed = 140;
+		
+		if(this.isJumping && this.velocity.y <= 0){
+			
+			this.velocity.y += jumpDecaySpeed * myNameSpace.deltaTime;
+			
+		} else {
+			
+			this.velocity.y = 0;
+			
+			this.isJumping = false;
+		} // if
+		
+		
 		// moves the player based on players velocity
 		
 		this.position.x += this.velocity.x * myNameSpace.deltaTime;
 		this.position.y += (this.velocity.y + myNameSpace.gravity) * myNameSpace.deltaTime;
+		
+		
+		
 		
 	}; // update()
 	
@@ -148,7 +173,7 @@ window.myNameSpace.player = function player(){
 		var bodyYStartingPoint = this.position.y + (this.height * this.hatSizePercent) + (this.height * this.headSizePercent); // because body is drawn under head
 		
 		// set colour for head
-		myNameSpace.ctx.fillStyle = this.playerColour.body;
+		/*myNameSpace.ctx.fillStyle = this.playerColour.body;
 			 
 		// start drawing circle
 		myNameSpace.ctx.beginPath();
@@ -157,14 +182,39 @@ window.myNameSpace.player = function player(){
 		myNameSpace.ctx.arc(this.position.x + (bodyWidth / 2), bodyYStartingPoint + bodyRadius, bodyRadius, 0, 2 * Math.PI); 
 			 
 		// fill circles colour
-		myNameSpace.ctx.fill();
+		myNameSpace.ctx.fill();*/
+		
+		// initialise the players body
+		// function ref: init(r, posx, posy, velx, vely, a, colour, tag)
+		this.playerBody.init(bodyRadius, this.position.x + (bodyWidth / 2), bodyYStartingPoint + bodyRadius,
+							 0, 0, 0, this.playerColour.body, "playerBody");
+		
+		// draw the body
+		this.playerBody.draw();
 		
 	}; // drawBody()
 	
 	
 	////////////////////////////// move() //////////////////////////////
 	
-	this.move = function move(){
+	this.move = function move(key){
+		
+		switch(key){
+			case "right":
+				
+				this.velocity.x = 100;
+				
+				break;
+				
+			case "left":
+				
+				this.velocity.x = - 100;
+				break;
+				
+			default:
+				this.velocity.x = 0;
+				break;
+		} // switch
 		
 	}; // move()
 	
@@ -173,9 +223,14 @@ window.myNameSpace.player = function player(){
 	
 	this.jump = function jump(){
 		
+		// set player to jumping
+		this.isJumping = true;
+		
+		// set y velcoity to jump velocity
+		this.velocity.y = -300;
 		
 	}; // jump()
-	
+
 	
 	////////////////////////////// attack() //////////////////////////////
 	
@@ -183,6 +238,20 @@ window.myNameSpace.player = function player(){
 		
 		
 	}; // attack()
+	
+	
+	////////////////////////////// collidingWithFloor() //////////////////////////////
+	
+	// checks to see if the player is colliding with the floor
+	this.collidingWithFloor = function collidingWithFloor(floorObject){
+		
+		// check to see if the player is colliding with the floor
+		if(this.playerBody.position.y >= floorObject.position.y - this.playerBody.radius && !this.isJumping){
+			
+			this.position.y = floorObject.position.y - this.height;
+		} // if
+		
+	}; // collidingWithFloor()
 	
 }; // Player Object
 
