@@ -1,8 +1,20 @@
 // javascript file that holds the main function for the game
+// the game is run from this file
 
 // window.myNameSpace is my global object that I can add all of my functions too.
 // Setting it up, equals window(the open browser window).myNameSpace to itself if it's there or an empty object if it isn't
 window.myNameSpace = window.myNameSpace || { };
+
+
+////////////////////////////// Variables //////////////////////////////
+
+myNameSpace.gravity = 30;
+
+myNameSpace.currentTime = 0;
+myNameSpace.lastTime = 0;
+myNameSpace.deltaTime = 0;
+
+myNameSpace.time = performance || Date;
 
 
 ////////////////////////////// main() //////////////////////////////
@@ -26,11 +38,8 @@ myNameSpace.main = function main() {
 	// set the width and height of the canvas
 	canvas.width = 800;
 	canvas.height = 600;
-
-	// initialise a new game engine object
-	var gameEngine = new myNameSpace.Engine();
-	myNameSpace.gameEngine = gameEngine;
 	
+	// create the player object
 	var thePlayer = new myNameSpace.player();
 	myNameSpace.thePlayer = thePlayer;
 	
@@ -48,7 +57,6 @@ myNameSpace.main = function main() {
 	
 	// center the divs contents
 	theDiv.style.textAlign = "Center";
-
 	
 	// Running Setup Functions
 	
@@ -67,8 +75,28 @@ myNameSpace.main = function main() {
 // that controls the game loop
 myNameSpace.gameOperations = function gameOperations(){
 	
+	////////////////////////////// Clear Canvas //////////////////////////////
+	
 	// clear the canvas so the object can be redrawn
 	myNameSpace.ctx.clearRect(0, 0, myNameSpace.canvas.width, myNameSpace.canvas.height);
+	
+	
+	////////////////////////////// Update State //////////////////////////////
+	
+	// updates the positions and state of objects
+	
+	// update the players state
+	myNameSpace.thePlayer.update();
+	
+	
+	////////////////////////////// Check Collisions //////////////////////////////
+	
+	// checks collisions and runs required code
+	
+	
+	////////////////////////////// Render Objects //////////////////////////////
+	
+	// draws the objects to the screen
 	
 	// draw the level
 	myNameSpace.levelOne.drawLevel();
@@ -77,3 +105,26 @@ myNameSpace.gameOperations = function gameOperations(){
 	myNameSpace.thePlayer.draw();
 	
 }; // gameOperations()
+
+
+////////////////////////////// gameLoop() //////////////////////////////
+
+// this is the main game loop that runs every frame.
+myNameSpace.gameLoop = function gameLoop(timeStamp){
+
+	// save the current time	
+	myNameSpace.currentTime = timeStamp || myNameSpace.time.now();
+	
+	// Calculate delta time
+	myNameSpace.deltaTime = myNameSpace.tools.getDeltaTime(myNameSpace.currentTime, myNameSpace.lastTime);
+
+	// Run game code
+	myNameSpace.gameOperations();
+
+	// save the last time
+	myNameSpace.lastTime = timeStamp || myNameSpace.time.now();
+
+	// Runs function every frame
+	window.requestAnimationFrame(gameLoop);
+	
+}; // gameLoop()

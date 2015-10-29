@@ -51,7 +51,7 @@ window.myNameSpace.player = function player(){
 		
 		// draw player if alive
 		if(this.isAlive){
-			
+	
 			// draw players head
 			this.drawHead();
 			
@@ -67,6 +67,19 @@ window.myNameSpace.player = function player(){
 		} // if
 		
 	}; // draw()
+	
+	
+	////////////////////////////// update() //////////////////////////////
+	
+	// function that updates the state of the player
+	this.update = function update(){
+		
+		// moves the player based on players velocity
+		
+		this.position.x += this.velocity.x * myNameSpace.deltaTime;
+		this.position.y += (this.velocity.y + myNameSpace.gravity) * myNameSpace.deltaTime;
+		
+	}; // update()
 	
 	
 	////////////////////////////// drawHat() //////////////////////////////

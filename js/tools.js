@@ -41,3 +41,11 @@ myNameSpace.tools.addAttribute = function addAttribute(element, attribute, attri
 	element.setAttribute(attribute, attributeValue);
 	
 }; // addAttribute()
+
+
+myNameSpace.tools.getDeltaTime = function getDeltaTime(currentTime, lastTime){
+
+	var deltaTime = (currentTime - lastTime) / 1000;
+	
+	return deltaTime;
+};

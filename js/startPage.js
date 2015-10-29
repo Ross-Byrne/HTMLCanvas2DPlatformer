@@ -102,6 +102,6 @@ myNameSpace.startPage.startButtonClicked = function startButtonClicked(){
 	myNameSpace.levelOne.setUpLevel();
 	
 	// Start the game loop
-	myNameSpace.gameEngine.update();
+	myNameSpace.gameLoop();
 	
 }; // startButtonClicked()
