@@ -23,6 +23,7 @@ window.myNameSpace.player = function player(){
 	this.health = 4;
 	
 	this.isJumping = false;
+	this.isMoving = false;
 	
 	// players hit box will be a rectangle so body parts are split 
 	// between allocated height
@@ -55,6 +56,7 @@ window.myNameSpace.player = function player(){
 	
 	////////////////////////////// draw() //////////////////////////////
 	
+	// draws the player to the screen
 	this.draw = function draw(){
 		
 		// draw player if alive
@@ -69,9 +71,6 @@ window.myNameSpace.player = function player(){
 			// draw players body
 			this.drawBody();
 			
-			// draw refrence rectangle 
-			myNameSpace.ctx.fillRect(100, this.position.y, this.width, this.height);
-			
 		} // if
 		
 	}; // draw()
@@ -82,6 +81,7 @@ window.myNameSpace.player = function player(){
 	// function that updates the state of the player
 	this.update = function update(){
 		
+		// variable to decide how fast player runs out of jump power
 		var jumpDecaySpeed = 140;
 		
 		if(this.isJumping && this.velocity.y <= 0){
@@ -93,16 +93,12 @@ window.myNameSpace.player = function player(){
 			this.velocity.y = 0;
 			
 			this.isJumping = false;
-		} // if
-		
+		} // if	
 		
 		// moves the player based on players velocity
 		
 		this.position.x += this.velocity.x * myNameSpace.deltaTime;
-		this.position.y += (this.velocity.y + myNameSpace.gravity) * myNameSpace.deltaTime;
-		
-		
-		
+		this.position.y += (this.velocity.y + myNameSpace.gravity) * myNameSpace.deltaTime;	
 		
 	}; // update()
 	
@@ -197,21 +193,30 @@ window.myNameSpace.player = function player(){
 	
 	////////////////////////////// move() //////////////////////////////
 	
+	// moves the player
 	this.move = function move(key){
 		
 		switch(key){
 			case "right":
 				
-				this.velocity.x = 100;
+				this.isMoving = true;
+				
+				this.velocity.x = 160;
 				
 				break;
 				
 			case "left":
 				
-				this.velocity.x = - 100;
+				this.isMoving = true;
+				
+				this.velocity.x = -160;
+		
 				break;
 				
-			default:
+			case "stop":
+				
+				this.isMoving = false;
+				
 				this.velocity.x = 0;
 				break;
 		} // switch
@@ -221,6 +226,7 @@ window.myNameSpace.player = function player(){
 	
 	////////////////////////////// jump() //////////////////////////////
 	
+	// makes the player jump
 	this.jump = function jump(){
 		
 		// set player to jumping
@@ -246,9 +252,14 @@ window.myNameSpace.player = function player(){
 	this.collidingWithFloor = function collidingWithFloor(floorObject){
 		
 		// check to see if the player is colliding with the floor
-		if(this.playerBody.position.y >= floorObject.position.y - this.playerBody.radius && !this.isJumping){
+		if(this.playerBody.position.y >= floorObject.position.y - this.playerBody.radius && !this.isJumping
+		  && this.playerBody.position.y + this.playerBody.radius >! floorObject.position.y + floorObject.height){
 			
-			this.position.y = floorObject.position.y - this.height;
+			if(this.playerBody.position.x >= floorObject.position.x - this.playerBody.radius && 
+			   this.playerBody.position.x - this.playerBody.radius <= floorObject.position.x + floorObject.width){
+				
+				this.position.y = floorObject.position.y - this.height;
+			}
 		} // if
 		
 	}; // collidingWithFloor()
