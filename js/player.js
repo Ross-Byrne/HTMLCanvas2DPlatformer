@@ -251,15 +251,57 @@ window.myNameSpace.player = function player(){
 	// checks to see if the player is colliding with the floor
 	this.collidingWithFloor = function collidingWithFloor(floorObject){
 		
-		// check to see if the player is colliding with the floor
-		if(this.playerBody.position.y >= floorObject.position.y - this.playerBody.radius && !this.isJumping
-		  && this.playerBody.position.y + this.playerBody.radius >! floorObject.position.y + floorObject.height){
+		
+		// check to see if the player is colliding with a wall on the right hand side
+		/*if(this.position.x + this.width > floorObject.position.x){
 			
-			if(this.playerBody.position.x >= floorObject.position.x - this.playerBody.radius && 
-			   this.playerBody.position.x - this.playerBody.radius <= floorObject.position.x + floorObject.width){
+			if(this.position.y + this.height > floorObject.position.y && 
+			   this.position.y + this.height <= floorObject.position.y + floorObject.height)
 				
-				this.position.y = floorObject.position.y - this.height;
-			}
+				// make player stop when they hit the wall
+				this.velocity.x = 0;
+			
+		} // if*/
+		
+		
+		// if player is completely under the floor object
+		if(this.position.y + this.height >= floorObject.position.y + floorObject.height){
+			
+			// check if the player is colliding with the bottom of a floor object
+			if(this.position.y <= floorObject.position.y + floorObject.height){
+				
+				// check if actually on the floor object
+				if(this.position.x + this.width >= floorObject.position.x && 
+				   this.position.x <= floorObject.position.x + floorObject.width){
+				
+					// make the player collide with roof/bottom of floor object
+					this.position.y = floorObject.position.y + floorObject.height;
+					
+					// make them bounce off it
+					this.velocity.y += 50;
+		
+				} // if
+				
+			} // if
+			
+			
+		} else { // if the player is colliding with the top of the floor object
+		
+			// check to see if the player is colliding with the floor
+			if(this.position.y + this.height >= floorObject.position.y && !this.isJumping){
+
+				// check if actually on the floor object
+				if(this.position.x + this.width >= floorObject.position.x && 
+				   this.position.x <= floorObject.position.x + floorObject.width){
+
+					// set player to top of floor object
+					this.position.y = floorObject.position.y - this.height;
+				
+					
+				} // if
+				
+			} // if
+			
 		} // if
 		
 	}; // collidingWithFloor()
