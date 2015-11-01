@@ -229,11 +229,15 @@ window.myNameSpace.player = function player(){
 	// makes the player jump
 	this.jump = function jump(){
 		
-		// set player to jumping
-		this.isJumping = true;
+		// make sure the player isn't already jumping
+		if(!this.isJumping){
+			
+			// set player to jumping
+			this.isJumping = true;
 		
-		// set y velcoity to jump velocity
-		this.velocity.y = -300;
+			// set y velcoity to jump velocity
+			this.velocity.y = -300;
+		} // if
 		
 	}; // jump()
 
@@ -252,58 +256,71 @@ window.myNameSpace.player = function player(){
 	// checks to see if the player is colliding with the floor
 	this.collidingWithFloor = function collidingWithFloor(floorObject){
 		
-		// check to see if the player is colliding with a wall on the right hand side
-		if(this.position.x + this.width >= floorObject.position.x){
-			
-			// check if the player is actually inside the floors y axis so if can collide
-			if(this.position.y + this.height <= floorObject.position.y &&
-			  this.position.y + this.height <= floorObject.position.y + floorObject.height ||
-			  this.position.y <= floorObject.position.y + floorObject.height ){
-				
-				console.log("Trigger");
-				
-				//this.position.x = floorObject.position.x;
-			} // if
-		} // if
+		// get the center X and Y coords for the player (posX and posY are the top right corner)
+		var playerCenterX = this.position.x + (this.width / 2);
+		var playerCenterY = this.position.y + (this.height / 2);
 		
-		// if player is completely under the floor object
-		if(this.position.y + this.height >= floorObject.position.y + floorObject.height){
-			
-			// check if the player is colliding with the bottom of a floor object
-			if(this.position.y <= floorObject.position.y + floorObject.height){
+		// get the center X and Y coords for the floor object
+		var objectCenterX = floorObject.position.x + (floorObject.width / 2);
+		var objectCenterY = floorObject.position.y + (floorObject.height / 2);
+		
+		// calculate the Minkowski sum to detect if a collision is happening
+		// found calculation on Game Development Stack Exchange
+		// ref: http://gamedev.stackexchange.com/questions/29786/a-simple-2d-rectangle-collision-algorithm-that-also-determines-which-sides-that
+	
+		var w = 0.5 * (this.width + floorObject.width);
+		var h = 0.5 * (this.height + floorObject.height);
+		var dx = playerCenterX - objectCenterX;
+		var dy = playerCenterY - objectCenterY;
+
+		// if a collision is detected
+		if (Math.abs(dx) <= w && Math.abs(dy) <= h){
+	
+			var wy = w * dy;
+			var hx = h * dx;
+
+			// find out which side of the rectangle that is the player
+			// was collided with
+			if (wy > hx){
 				
-				// check if actually on the floor object
-				if(this.position.x + this.width >= floorObject.position.x + 4 && 
-				   this.position.x <= floorObject.position.x + floorObject.width - 4){
-				
-					// make the player collide with roof/bottom of floor object
-					this.position.y = floorObject.position.y + floorObject.height;
+				if (wy > -hx){ // collision at the top
 					
-					// make them bounce off it
+					// make them bounce off something above the player
 					this.velocity.y += 50;
-		
-				} // if
-			} // if
 			
-		} else { // if the player is colliding with the top of the floor object
-		
-			// check to see if the player is colliding with the floor
-			if(this.position.y + this.height >= floorObject.position.y && !this.isJumping){
-
-				// check if actually on the floor object
-				if(this.position.x + this.width >= floorObject.position.x + 4 && 
-				   this.position.x <= floorObject.position.x + floorObject.width - 4){
-
-					// set player to top of floor object
-					this.position.y = floorObject.position.y - this.height;
-				
+				} else { // on the right
+						
+					// if player is moving towards the wall or directly against it
+					if(this.velocity.x >= 0){
+						
+						// stop the player from entering the wall
+						this.position.x = floorObject.position.x - this.width;
+						
+					} // if
+					
 				} // if
-			} // if
+				
+			} else {
+				
+				if (wy > -hx) { // on the left side
+				
+					// if player is moving towards the wall or directly against it
+					if(this.velocity.x <= 0){
+						
+						// stop the player from entering the wall
+						this.position.x = floorObject.position.x + floorObject.width;
+						
+					} // if
+					
+				} else { // at the bottom
+					
+					// stop the player from falling through floor
+					this.position.y = floorObject.position.y - this.height;
+					
+				} // if
+			} // if	
 			
 		} // if
-		
-		
-		
 		
 	}; // collidingWithFloor()
 	
