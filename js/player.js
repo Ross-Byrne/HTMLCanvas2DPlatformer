@@ -335,7 +335,7 @@ window.myNameSpace.player = function player(){
 					this.position.y = floorObject.position.y - this.height;
 					
 					// player landed, end jump
-					this.isJumping = false;
+					//this.isJumping = false;
 					
 				} // if
 			} // if	

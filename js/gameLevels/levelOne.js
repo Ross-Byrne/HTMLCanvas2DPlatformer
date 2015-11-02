@@ -11,7 +11,11 @@ window.myNameSpace.levelOne = { };
 
 ////////////////////////////// Variables //////////////////////////////
 
+// array of floor objects
 myNameSpace.levelOne.floorObjects = [];
+
+// the y axis of the groundLevel
+myNameSpace.levelOne.groundLevelYAxis = 0;
 
 
 ////////////////////////////// setUpLevel() //////////////////////////////
@@ -25,6 +29,9 @@ myNameSpace.levelOne.setUpLevel = function setUpLevel(){
 	// creates the second level of floor layout for level
 	myNameSpace.levelOne.createSecondFloorLevel();
 	
+	// creates the third level of floor layout
+	myNameSpace.levelOne.createThirdFloorLevel();
+	
 }; // setUpLevel()
 
 
@@ -32,9 +39,6 @@ myNameSpace.levelOne.setUpLevel = function setUpLevel(){
 
 // this function is called every frame to draw the level
 myNameSpace.levelOne.drawLevel = function drawLevel(){
-	
-	// draws the object
-	//myNameSpace.levelOne.groundLevel.draw();
 	
 	// draw floor objects
 	for(var i = 0; i < myNameSpace.levelOne.floorObjects.length; ++i){
@@ -66,6 +70,9 @@ myNameSpace.levelOne.createFloorLayout = function createFloorLayout(){
 	groundLevelFloor.colour = "rgb(70, 70, 70)";
 	groundLevelFloor.tag = "floor";
 	
+	// save the games groundLevelYAxis
+	myNameSpace.levelOne.groundLevelYAxis = groundLevelFloor.position.y;
+	
 	// add groundFloor to array of floor objects
 	myNameSpace.levelOne.floorObjects.push(groundLevelFloor);
 	
@@ -77,7 +84,7 @@ myNameSpace.levelOne.createFloorLayout = function createFloorLayout(){
 	floorPart.width = myNameSpace.canvas.width * .25; // 25% the width of the canvas
 	
 	floorPart.position.x = (myNameSpace.canvas.width * .6); // start drawing object 60% the length of the canvas from left side
-	floorPart.position.y = (myNameSpace.canvas.height - myNameSpace.levelOne.groundLevelFloor.height) - floorPart.height;
+	floorPart.position.y = myNameSpace.levelOne.groundLevelYAxis - floorPart.height;
 	floorPart.colour = "rgb(70, 70, 70)";
 	floorPart.tag = "floor";
 	
@@ -106,7 +113,7 @@ myNameSpace.levelOne.createFloorLayout = function createFloorLayout(){
 myNameSpace.levelOne.createSecondFloorLevel = function createSecondFloorLevel(){
 	
 	// get current ground level
-	var curGroundLevel = myNameSpace.canvas.height - myNameSpace.levelOne.groundLevelFloor.height;
+	var curGroundLevel = myNameSpace.levelOne.groundLevelYAxis;
 	
 	// create floor part
 	var secondFloorPart = new myNameSpace.gameObjects.Rectangle();
@@ -147,4 +154,61 @@ myNameSpace.levelOne.createSecondFloorLevel = function createSecondFloorLevel(){
 	// add floor part to the array of floor objects
 	myNameSpace.levelOne.floorObjects.push(secondFloorPart1);
 	
+
+	// create a ladder using a loop
+	// loop 6 times to make 6 ladder steps
+	for(var i = 0; i < 6; ++i){
+		
+		// create a ladder
+		var secondFloorPart2 = new myNameSpace.gameObjects.Rectangle();
+
+		// set height and width
+		secondFloorPart2.height = 14;
+		secondFloorPart2.width = 30;
+
+		// set properties
+
+		// start where secondFoorPart1 ends + a space of 6% the width of canvas
+		secondFloorPart2.position.x = secondFloorPart1.position.x + (myNameSpace.canvas.width * .06);
+
+		// position y is equal to 24% above ground level - the height of floor + an increase of i * .4 for each step
+		secondFloorPart2.position.y = curGroundLevel - (myNameSpace.canvas.height * (.24 + (i * .04)) - secondFloorPart2.height);
+		secondFloorPart2.colour = "rgb(70, 70, 70)";
+		secondFloorPart2.tag = "ladder";
+
+		// add floor part to the array of floor objects
+		myNameSpace.levelOne.floorObjects.push(secondFloorPart2);
+	}
+	
 }; // createSecondFloorLevel()
+
+
+////////////////////////////// createThirdFloorLevel() //////////////////////////////
+
+myNameSpace.levelOne.createThirdFloorLevel = function createThirdFloorLevel(){
+	
+	// create a floor object
+	var thirdFloorPart = new myNameSpace.gameObjects.Rectangle();
+	
+	// set height and width
+	
+	thirdFloorPart.height = 30;
+	
+	// width of the object is 40% of the width of the canvas
+	thirdFloorPart.width = myNameSpace.canvas.width * .4;
+	
+	// set properties
+	
+	// start 60% of the way across the width of the canvas
+	thirdFloorPart.position.x = (myNameSpace.canvas.width * .36);
+
+	// position y is equal to 40% above ground level
+	thirdFloorPart.position.y = myNameSpace.levelOne.groundLevelYAxis - (myNameSpace.canvas.height * .5) - thirdFloorPart.height;
+	thirdFloorPart.colour = "rgb(70, 70, 70)";
+	thirdFloorPart.tag = "floor";
+
+	// add floor part to the array of floor objects
+	myNameSpace.levelOne.floorObjects.push(thirdFloorPart);
+	
+}; // createThirdFloorLevel()
+
