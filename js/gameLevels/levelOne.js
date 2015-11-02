@@ -113,11 +113,13 @@ myNameSpace.levelOne.createSecondFloorLevel = function createSecondFloorLevel(){
 	
 	// set up floor part
 	secondFloorPart.height = 30;
-	secondFloorPart. width = myNameSpace.canvas.width * .65;
+	secondFloorPart. width = myNameSpace.canvas.width * .64;
 	
 	// set properties
 	secondFloorPart.position.x = 0;
-	secondFloorPart.position.y = curGroundLevel - (myNameSpace.canvas.height * .2) - secondFloorPart.height;
+	
+	// position y is equal to 26% above ground level - the height of floor
+	secondFloorPart.position.y = curGroundLevel - (myNameSpace.canvas.height * .26) - secondFloorPart.height;
 	secondFloorPart.colour = "rgb(70, 70, 70)";
 	secondFloorPart.tag = "floor";
 	
@@ -128,15 +130,17 @@ myNameSpace.levelOne.createSecondFloorLevel = function createSecondFloorLevel(){
 	var secondFloorPart1 = new myNameSpace.gameObjects.Rectangle();
 	
 	secondFloorPart1.height = 30;
-	// width is whatever is left of the canvas width after secondFloorPart and the space between it asnd secondFloorPart1
-	secondFloorPart1. width = myNameSpace.canvas.width - secondFloorPart.width - (myNameSpace.canvas.width * .13);
+	
+	// width is whatever is left of the canvas width after secondFloorPart and the space between it and secondFloorPart1
+	secondFloorPart1.width = myNameSpace.canvas.width - secondFloorPart.width - (myNameSpace.canvas.width * .14);
 	
 	// set properties
 	
-	// start where secondFoorPart ends + a space of 13% the width of canvas
-	secondFloorPart1.position.x = secondFloorPart.width + (myNameSpace.canvas.width * .13);
-	// position y is equal to 20% above ground level - the height of floor
-	secondFloorPart1.position.y = curGroundLevel - (myNameSpace.canvas.height * .2) - secondFloorPart1.height;
+	// start where secondFoorPart ends + a space of 14% the width of canvas
+	secondFloorPart1.position.x = secondFloorPart.width + (myNameSpace.canvas.width * .14);
+	
+	// position y is equal to 18% above ground level - the height of floor
+	secondFloorPart1.position.y = curGroundLevel - (myNameSpace.canvas.height * .18) - secondFloorPart1.height;
 	secondFloorPart1.colour = "rgb(70, 70, 70)";
 	secondFloorPart1.tag = "floor";
 	

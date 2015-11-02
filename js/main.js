@@ -8,7 +8,7 @@ window.myNameSpace = window.myNameSpace || { };
 
 ////////////////////////////// Variables //////////////////////////////
 
-myNameSpace.gravity = 140;
+myNameSpace.gravity = 160;
 
 myNameSpace.currentTime = 0;
 myNameSpace.lastTime = 0;

@@ -82,17 +82,23 @@ window.myNameSpace.player = function player(){
 	this.update = function update(){
 		
 		// variable to decide how fast player runs out of jump power
-		var jumpDecaySpeed = 140;
+		var jumpDecaySpeed = 158;
 		
+		// check to make sure the player is jumping
+		// and that their velocity is less then 0 (negitive velocity to go up)
 		if(this.isJumping && this.velocity.y <= 0){
 			
+			// increase velocity using delta time and the decay speed
 			this.velocity.y += jumpDecaySpeed * myNameSpace.deltaTime;
 			
-		} else {
+		} else { // if velocity is 0 or greater
 			
+			// set to 0 to stop player being sucked down
 			this.velocity.y = 0;
 			
+			// set isJumping to false, jump is over
 			this.isJumping = false;
+			
 		} // if	
 		
 		// moves the player based on players velocity
@@ -121,7 +127,8 @@ window.myNameSpace.player = function player(){
 		myNameSpace.ctx.fillStyle = this.playerColour.hat;
 
 		// draw hat part1 - hat body
-		myNameSpace.ctx.fillRect(this.position.x + hatWidthOffSet + (hatBodyIndent / 2), this.position.y, hatWidth - hatBodyIndent, hatHeight - hatRimHeight);
+		myNameSpace.ctx.fillRect(this.position.x + hatWidthOffSet + (hatBodyIndent / 2), 
+								 this.position.y, hatWidth - hatBodyIndent, hatHeight - hatRimHeight);
 		
 		// draw hat part2 - hat rim
 		myNameSpace.ctx.fillRect(this.position.x + hatWidthOffSet, this.position.y + hatHeight - hatRimHeight, hatWidth, hatRimHeight);
@@ -196,28 +203,38 @@ window.myNameSpace.player = function player(){
 	// moves the player
 	this.move = function move(key){
 		
+		// key is a string passed into the function
 		switch(key){
-			case "right":
+			case "right": // to move player right
 				
+				// set isMoving to true
 				this.isMoving = true;
 				
+				// increase the player's velocity on the x axis
+				// to move them
 				this.velocity.x = 160;
 				
 				break;
 				
-			case "left":
+			case "left": // to move the player left
 				
+				// set isMoving to true
 				this.isMoving = true;
 				
+				// increase the player's velocity on the x axis
+				// to move them (- velocity to move them left)
 				this.velocity.x = -160;
 		
 				break;
 				
-			case "stop":
+			case "stop": // to stop the player
 				
+				// set isMoving to false
 				this.isMoving = false;
 				
+				// set the players velocity on the X axis to 0
 				this.velocity.x = 0;
+				
 				break;
 		} // switch
 		
@@ -236,7 +253,7 @@ window.myNameSpace.player = function player(){
 			this.isJumping = true;
 		
 			// set y velcoity to jump velocity
-			this.velocity.y = -300;
+			this.velocity.y = -330;
 		} // if
 		
 	}; // jump()
@@ -316,6 +333,9 @@ window.myNameSpace.player = function player(){
 					
 					// stop the player from falling through floor
 					this.position.y = floorObject.position.y - this.height;
+					
+					// player landed, end jump
+					this.isJumping = false;
 					
 				} // if
 			} // if	
