@@ -24,6 +24,7 @@ window.myNameSpace.player = function player(){
 	
 	this.isJumping = false;
 	this.isMoving = false;
+	this.isOnLadder = false;
 	
 	// players hit box will be a rectangle so body parts are split 
 	// between allocated height
@@ -227,6 +228,18 @@ window.myNameSpace.player = function player(){
 		
 				break;
 				
+			case "up": // to move the player up a ladder
+				
+				this.velocity.y = -330;
+				
+				break;
+				
+			case "down": // to move a player down a ladder
+				
+				this.velocity.y = 330;
+				
+				break;
+				
 			case "stop": // to stop the player
 				
 				// set isMoving to false
@@ -293,52 +306,67 @@ window.myNameSpace.player = function player(){
 		// if a collision is detected
 		if (Math.abs(dx) <= w && Math.abs(dy) <= h){
 	
-			var wy = w * dy;
-			var hx = h * dx;
-
-			// find out which side of the rectangle that is the player
-			// was collided with
-			if (wy > hx){
+			// Check to see if the player is on a ladder
+			/*if(floorObject.tag == "ladder"){
 				
-				if (wy > -hx){ // collision at the top
-					
-					// make them bounce off something above the player
-					this.velocity.y += 50;
-			
-				} else { // on the right
-						
-					// if player is moving towards the wall or directly against it
-					if(this.velocity.x >= 0){
-						
-						// stop the player from entering the wall
-						this.position.x = floorObject.position.x - this.width;
-						
-					} // if
-					
-				} // if
+				// if yes, set isOnLadder to true
+				this.isOnLadder = true;
+				
+				console.log("On Ladder");
 				
 			} else {
 				
-				if (wy > -hx) { // on the left side
+				// otherwise set it back to false
+				this.isOnLadder = false;
 				
-					// if player is moving towards the wall or directly against it
-					if(this.velocity.x <= 0){
-						
-						// stop the player from entering the wall
-						this.position.x = floorObject.position.x + floorObject.width;
-						
+			} // if*/
+			
+			// check to see if the player collided with a floor object
+			if(floorObject.tag == "floor"){
+				var wy = w * dy;
+				var hx = h * dx;
+
+				// find out which side of the rectangle that is the player
+				// was collided with
+				if (wy > hx){
+
+					if (wy > -hx){ // collision at the top
+
+						// make them bounce off something above the player
+						this.velocity.y += 50;
+
+					} else { // on the right
+
+						// if player is moving towards the wall or directly against it
+						if(this.velocity.x >= 0){
+
+							// stop the player from entering the wall
+							this.position.x = floorObject.position.x - this.width;
+
+						} // if
 					} // if
-					
-				} else { // at the bottom
-					
-					// stop the player from falling through floor
-					this.position.y = floorObject.position.y - this.height;
-					
-					// player landed, end jump
-					//this.isJumping = false;
-					
-				} // if
-			} // if	
+
+				} else {
+
+					if (wy > -hx) { // on the left side
+
+						// if player is moving towards the wall or directly against it
+						if(this.velocity.x <= 0){
+
+							// stop the player from entering the wall
+							this.position.x = floorObject.position.x + floorObject.width;
+
+						} // if
+
+					} else { // at the bottom
+
+						// stop the player from falling through floor
+						this.position.y = floorObject.position.y - this.height;
+
+					} // if
+				} // if	
+
+			} // if
 			
 		} // if
 		

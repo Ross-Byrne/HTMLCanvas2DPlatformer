@@ -111,6 +111,25 @@ myNameSpace.gameOperations = function gameOperations(){
 			myNameSpace.thePlayer.move("left");
 			
 		}  // if
+		
+		// check to see if the player is on a ladder
+		if(myNameSpace.thePlayer.isOnLadder){
+			
+			if(event.keyCode == '38'){ // if UpArrow
+
+				// move player up a ladder
+				myNameSpace.thePlayer.move("up");
+
+			} // if
+
+			if(event.keyCode == '40'){ // if DownArrow
+
+				// move player down a ladder
+				myNameSpace.thePlayer.move("down");
+
+			} // if
+			
+		} // if
 								
 	}); // addEventListener()
 	
@@ -134,6 +153,25 @@ myNameSpace.gameOperations = function gameOperations(){
 			myNameSpace.thePlayer.move("stop");
 			
 		}  // if
+		
+		// check to see if the player is on a ladder
+		if(myNameSpace.thePlayer.isOnLadder){
+			
+			if(event.keyCode == '38'){ // if UpArrow
+
+				// stop player
+				myNameSpace.thePlayer.move("stop");
+
+			} // if
+
+			if(event.keyCode == '40'){ // if DownArrow
+
+				// stop player
+				myNameSpace.thePlayer.move("stop");
+
+			} // if
+			
+		} // if
 								
 	}); // addEventListener()
 	
