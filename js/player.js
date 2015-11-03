@@ -25,6 +25,7 @@ window.myNameSpace.player = function player(){
 	this.isJumping = false;
 	this.isMoving = false;
 	this.isOnLadder = false;
+	this.isGravity = true;
 	
 	// players hit box will be a rectangle so body parts are split 
 	// between allocated height
@@ -83,11 +84,26 @@ window.myNameSpace.player = function player(){
 	this.update = function update(){
 		
 		// variable to decide how fast player runs out of jump power
-		var jumpDecaySpeed = 158;
+		var jumpDecaySpeed = 164;
+		
+		// holder for the value of gravity
+		var gravity = myNameSpace.gravity;
+		
+		
+		if(this.isOnLadder){
+			
+			this.isGravity = false;
+		}
+		
+		if(!this.isGravity){
+			
+			gravity = 0;
+		
+		} // if
 		
 		// check to make sure the player is jumping
 		// and that their velocity is less then 0 (negitive velocity to go up)
-		if(this.isJumping && this.velocity.y <= 0){
+		if(this.isJumping /*&& this.velocity.y <= 0*/){
 			
 			// increase velocity using delta time and the decay speed
 			this.velocity.y += jumpDecaySpeed * myNameSpace.deltaTime;
@@ -105,7 +121,7 @@ window.myNameSpace.player = function player(){
 		// moves the player based on players velocity
 		
 		this.position.x += this.velocity.x * myNameSpace.deltaTime;
-		this.position.y += (this.velocity.y + myNameSpace.gravity) * myNameSpace.deltaTime;	
+		this.position.y += (this.velocity.y + gravity) * myNameSpace.deltaTime;	
 		
 	}; // update()
 	
@@ -267,6 +283,10 @@ window.myNameSpace.player = function player(){
 		
 			// set y velcoity to jump velocity
 			this.velocity.y = -330;
+			
+			// turn on gravity
+			this.isGravity = true;
+			
 		} // if
 		
 	}; // jump()
@@ -302,7 +322,7 @@ window.myNameSpace.player = function player(){
 		var h = 0.5 * (this.height + floorObject.height);
 		var dx = playerCenterX - objectCenterX;
 		var dy = playerCenterY - objectCenterY;
-
+		
 		// if a collision is detected
 		if (Math.abs(dx) <= w && Math.abs(dy) <= h){
 	
@@ -313,11 +333,6 @@ window.myNameSpace.player = function player(){
 				this.isOnLadder = true;
 				
 				console.log("On Ladder");
-				
-			} else {
-				
-				// otherwise set it back to false
-				this.isOnLadder = false;
 				
 			} // if*/
 			
@@ -331,12 +346,18 @@ window.myNameSpace.player = function player(){
 				if (wy > hx){
 
 					if (wy > -hx){ // collision at the top
+						
+						// Hit roof, turn on gravity
+						this.isGravity = true;
 
 						// make them bounce off something above the player
 						this.velocity.y += 50;
 
 					} else { // on the right
 
+						// hitting wall, turn on gravity
+						this.isGravity = true;
+						
 						// if player is moving towards the wall or directly against it
 						if(this.velocity.x >= 0){
 
@@ -350,9 +371,12 @@ window.myNameSpace.player = function player(){
 
 					if (wy > -hx) { // on the left side
 
+						// hitting wall, turn on gravity
+						this.isGravity = true;
+						
 						// if player is moving towards the wall or directly against it
 						if(this.velocity.x <= 0){
-
+							
 							// stop the player from entering the wall
 							this.position.x = floorObject.position.x + floorObject.width;
 
@@ -360,6 +384,17 @@ window.myNameSpace.player = function player(){
 
 					} else { // at the bottom
 
+						// on floor, turn off gravity
+						this.isGravity = false;
+						
+						// if jumping, stop
+						if(this.isJumping){
+							
+							this.isJumping = false;
+							this.velocity.y = 0;
+							
+						} // if
+						
 						// stop the player from falling through floor
 						this.position.y = floorObject.position.y - this.height;
 
