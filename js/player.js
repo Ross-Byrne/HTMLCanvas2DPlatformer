@@ -23,8 +23,10 @@ window.myNameSpace.player = function player(){
 	this.health = 4;
 	
 	this.isJumping = false;
+	this.canJumpOnLadder = false;
 	this.isMoving = false;
 	this.isOnLadder = false;
+	this.isMovingOnLadder = false;
 	this.isGravity = true;
 	
 	// players hit box will be a rectangle so body parts are split 
@@ -83,19 +85,31 @@ window.myNameSpace.player = function player(){
 	// function that updates the state of the player
 	this.update = function update(){
 		
-		console.log(this.isGravity);
-		
 		// variable to decide how fast player runs out of jump power
 		var jumpDecaySpeed = 164;
 		
 		// holder for the value of gravity
 		var gravity = myNameSpace.gravity;
 		
-		
+		// check if the player is on a ladder
 		if(this.isOnLadder){
 			
+			// turn off gravity if player is on a ladder
 			this.isGravity = false;
-		}
+			
+			if(!this.canJumpOnLadder){
+				
+				// end jump
+				this.isJumping = false;
+			}
+			
+		} else { // if not on ladder
+			
+			// cannot move on ladder if not on the ladder
+			// set to false
+			this.isMovingOnLadder = false;
+			
+		} // if
 		
 		// if there isn't meant to be gravity
 		if(!this.isGravity){
@@ -105,20 +119,23 @@ window.myNameSpace.player = function player(){
 		
 		} // if
 		
-		// check to make sure the player is jumping
-		// and that their velocity is less then 0 (negitive velocity to go up)
-		if(this.isJumping /*&& this.velocity.y <= 0*/){
+		// check if the player is jumping
+		if(this.isJumping){
 			
 			// increase velocity using delta time and the decay speed
+			// jumpDecaySpeed decides how fast a players jump runs out of power
 			this.velocity.y += jumpDecaySpeed * myNameSpace.deltaTime;
 			
-		} else { // if velocity is 0 or greater
+		} else { // if not jumping
 			
-			// set to 0 to stop player being sucked down
-			this.velocity.y = 0;
-			
-			// set isJumping to false, jump is over
-			this.isJumping = false;
+			// only stop player if not jumping
+			// if the player is not moving on a ladder
+			if(!this.isMovingOnLadder){
+				
+				// set y velocity to 0
+				this.velocity.y = 0;
+				
+			} // if
 			
 		} // if	
 		
@@ -127,8 +144,14 @@ window.myNameSpace.player = function player(){
 		this.position.x += this.velocity.x * myNameSpace.deltaTime;
 		this.position.y += (this.velocity.y + gravity) * myNameSpace.deltaTime;	
 		
-		// set gravity to on by default
+		// reset values back to default
+		
+		// set gravity to on by default (will turn off if standing on floor)
 		this.isGravity = true;
+		
+		// sets isOnLadder to false by default (will be set to true after this if on a ladder)
+		this.isOnLadder = false;
+		this.canJumpOnLadder = false;
 		
 	}; // update()
 	
@@ -253,13 +276,21 @@ window.myNameSpace.player = function player(){
 				
 			case "up": // to move the player up a ladder
 				
-				this.velocity.y = -330;
+				// set isMovingOnLadder to true
+				this.isMovingOnLadder = true;
+				
+				// change players Y velocity to move them up
+				this.velocity.y = -160;
 				
 				break;
 				
 			case "down": // to move a player down a ladder
 				
-				this.velocity.y = 330;
+				// set isMoving to true
+				this.isMovingOnLadder = true;
+				
+				// change players Y velocity to move them down
+				this.velocity.y = 160;
 				
 				break;
 				
@@ -334,14 +365,28 @@ window.myNameSpace.player = function player(){
 		if (Math.abs(dx) <= w && Math.abs(dy) <= h){
 	
 			// Check to see if the player is on a ladder
-			/*if(floorObject.tag == "ladder"){
+			if(floorObject.tag == "ladder"){
 				
 				// if yes, set isOnLadder to true
 				this.isOnLadder = true;
 				
-				console.log("On Ladder");
+				// if the player is on the ladder but the top half of the player is above if
+				if(this.position.y <= floorObject.position.y - (this.height / 2)){
+					
+					// let the player jump
+					this.canJumpOnLadder = true;
+					
+				} else { // if not
+					
+					// the player cannot jump on the ladder
+					this.canJumpOnLadder = false;
+					
+					// end any jump that might be happening
+					this.isJumping = false;
+					
+				} // if
 				
-			} // if*/
+			} // if
 			
 			// check to see if the player collided with a floor object
 			if(floorObject.tag == "floor"){

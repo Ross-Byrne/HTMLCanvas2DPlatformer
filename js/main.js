@@ -93,8 +93,18 @@ myNameSpace.gameOperations = function gameOperations(){
 		// check player input
 		if(event.keyCode == '32') {
 			
-			// make player jump
-			myNameSpace.thePlayer.jump();
+			// check if the player is on a ladder and if they can jump on it
+			if(myNameSpace.thePlayer.isOnLadder && !myNameSpace.thePlayer.canJumpOnLadder){
+
+				// if the player is on a ladder and cannot jump
+				// do nothing
+				
+			} else { // if not on a ladder or is allowed junp on one
+				
+				// make player jump
+				myNameSpace.thePlayer.jump();
+				
+			} // if
 	
 		} // if
 		
@@ -159,15 +169,15 @@ myNameSpace.gameOperations = function gameOperations(){
 			
 			if(event.keyCode == '38'){ // if UpArrow
 
-				// stop player
-				myNameSpace.thePlayer.move("stop");
+				// to stop player, set isMovingOnLadder to false
+				myNameSpace.thePlayer.isMovingOnLadder = false;
 
 			} // if
 
 			if(event.keyCode == '40'){ // if DownArrow
 
-				// stop player
-				myNameSpace.thePlayer.move("stop");
+				// to stop player, set isMovingOnLadder to false
+				myNameSpace.thePlayer.isMovingOnLadder = false;
 
 			} // if
 			
