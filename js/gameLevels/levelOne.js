@@ -157,14 +157,14 @@ myNameSpace.levelOne.createSecondFloorLevel = function createSecondFloorLevel(){
 
 	// create a ladder using a loop
 	// loop 6 times to make 6 ladder steps
-	for(var i = 0; i < 6; ++i){
+	for(var i = 0; i < 8; ++i){
 		
 		// create a ladder
 		var secondFloorPart2 = new myNameSpace.gameObjects.Rectangle();
 
 		// set height and width
-		secondFloorPart2.height = 14;
-		secondFloorPart2.width = 30;
+		secondFloorPart2.height = 12;
+		secondFloorPart2.width = 40;
 
 		// set properties
 
@@ -172,8 +172,8 @@ myNameSpace.levelOne.createSecondFloorLevel = function createSecondFloorLevel(){
 		secondFloorPart2.position.x = secondFloorPart1.position.x + (myNameSpace.canvas.width * .06);
 
 		// position y is equal to 24% above ground level - the height of floor + an increase of i * .4 for each step
-		secondFloorPart2.position.y = curGroundLevel - (myNameSpace.canvas.height * (.24 + (i * .04)) - secondFloorPart2.height);
-		secondFloorPart2.colour = "rgb(70, 70, 70)";
+		secondFloorPart2.position.y = curGroundLevel - (myNameSpace.canvas.height * (.29 + (i * .04)) - secondFloorPart2.height);
+		secondFloorPart2.colour = "rgb(140, 70, 20)";
 		secondFloorPart2.tag = "ladder";
 
 		// add floor part to the array of floor objects

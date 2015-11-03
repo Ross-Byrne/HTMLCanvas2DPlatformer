@@ -43,10 +43,6 @@ myNameSpace.main = function main() {
 	var thePlayer = new myNameSpace.player();
 	myNameSpace.thePlayer = thePlayer;
 	
-	//set the players x and y position
-	thePlayer.position.x = 50;
-	thePlayer.position.y = 50;
-	
 	// Initalise Variables
 
 	// hide canvas by default
@@ -73,12 +69,14 @@ myNameSpace.main = function main() {
 
 // it is clearer to keep the game code separate from the function
 // that controls the game loop
+
+// Order of code execution
+// 
+// 1. Checks player input
+// 2. Updates the state of objects
+// 3. Checks Collisions
+// 4. Draws Objects to the screen
 myNameSpace.gameOperations = function gameOperations(){
-	
-	////////////////////////////// Clear Canvas //////////////////////////////
-	
-	// clear the canvas so the object can be redrawn
-	myNameSpace.ctx.clearRect(0, 0, myNameSpace.canvas.width, myNameSpace.canvas.height);
 	
 	
 	////////////////////////////// Check Input //////////////////////////////
@@ -210,6 +208,9 @@ myNameSpace.gameOperations = function gameOperations(){
 	
 	
 	////////////////////////////// Render Objects //////////////////////////////
+	
+	// clear the canvas so the object can be redrawn
+	myNameSpace.ctx.clearRect(0, 0, myNameSpace.canvas.width, myNameSpace.canvas.height);
 	
 	// draws the objects to the screen
 	
