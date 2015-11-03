@@ -83,6 +83,8 @@ window.myNameSpace.player = function player(){
 	// function that updates the state of the player
 	this.update = function update(){
 		
+		console.log(this.isGravity);
+		
 		// variable to decide how fast player runs out of jump power
 		var jumpDecaySpeed = 164;
 		
@@ -95,8 +97,10 @@ window.myNameSpace.player = function player(){
 			this.isGravity = false;
 		}
 		
+		// if there isn't meant to be gravity
 		if(!this.isGravity){
 			
+			// turn off gravity
 			gravity = 0;
 		
 		} // if
@@ -122,6 +126,9 @@ window.myNameSpace.player = function player(){
 		
 		this.position.x += this.velocity.x * myNameSpace.deltaTime;
 		this.position.y += (this.velocity.y + gravity) * myNameSpace.deltaTime;	
+		
+		// set gravity to on by default
+		this.isGravity = true;
 		
 	}; // update()
 	

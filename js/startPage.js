@@ -104,4 +104,10 @@ myNameSpace.startPage.startButtonClicked = function startButtonClicked(){
 	// Start the game loop
 	myNameSpace.gameLoop();
 	
+	// place players y axis at starting point, the levelOne groundLevelYAxis
+	myNameSpace.thePlayer.position.y = myNameSpace.levelOne.groundLevelYAxis - myNameSpace.thePlayer.height;
+	
+	// place the players x axis at 5% of the canvas width into the game
+	myNameSpace.thePlayer.position.x = myNameSpace.canvas.width * .05;
+	
 }; // startButtonClicked()
