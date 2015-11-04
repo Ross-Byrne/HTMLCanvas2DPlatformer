@@ -156,7 +156,7 @@ myNameSpace.levelOne.createSecondFloorLevel = function createSecondFloorLevel(){
 	
 
 	// create a ladder using a loop
-	// loop 6 times to make 6 ladder steps
+	// loop 8 times to make 8 ladder steps
 	for(var i = 0; i < 8; ++i){
 		
 		// create a ladder
@@ -172,13 +172,14 @@ myNameSpace.levelOne.createSecondFloorLevel = function createSecondFloorLevel(){
 		secondFloorPart2.position.x = secondFloorPart1.position.x + (myNameSpace.canvas.width * .06);
 
 		// position y is equal to 24% above ground level - the height of floor + an increase of i * .4 for each step
-		secondFloorPart2.position.y = curGroundLevel - (myNameSpace.canvas.height * (.29 + (i * .04)) - secondFloorPart2.height);
+		secondFloorPart2.position.y = curGroundLevel - (myNameSpace.canvas.height * (.292 + (i * .04)) - secondFloorPart2.height);
 		secondFloorPart2.colour = "rgb(140, 70, 20)";
 		secondFloorPart2.tag = "ladder";
 
 		// add floor part to the array of floor objects
 		myNameSpace.levelOne.floorObjects.push(secondFloorPart2);
-	}
+		
+	} // for
 	
 }; // createSecondFloorLevel()
 
@@ -195,12 +196,12 @@ myNameSpace.levelOne.createThirdFloorLevel = function createThirdFloorLevel(){
 	thirdFloorPart.height = 30;
 	
 	// width of the object is 40% of the width of the canvas
-	thirdFloorPart.width = myNameSpace.canvas.width * .4;
+	thirdFloorPart.width = myNameSpace.canvas.width * .56;
 	
 	// set properties
 	
 	// start 60% of the way across the width of the canvas
-	thirdFloorPart.position.x = (myNameSpace.canvas.width * .36);
+	thirdFloorPart.position.x = (myNameSpace.canvas.width * .20);
 
 	// position y is equal to 40% above ground level
 	thirdFloorPart.position.y = myNameSpace.levelOne.groundLevelYAxis - (myNameSpace.canvas.height * .5) - thirdFloorPart.height;
@@ -209,6 +210,32 @@ myNameSpace.levelOne.createThirdFloorLevel = function createThirdFloorLevel(){
 
 	// add floor part to the array of floor objects
 	myNameSpace.levelOne.floorObjects.push(thirdFloorPart);
+	
+	// create a ladder using a loop
+	// loop 6 times to make 6 ladder steps
+	for(var i = 0; i < 6; ++i){
+		
+		// create a ladder
+		var thirdFloorPart1 = new myNameSpace.gameObjects.Rectangle();
+
+		// set height and width
+		thirdFloorPart1.height = 12;
+		thirdFloorPart1.width = 40;
+
+		// set properties
+
+		// start where secondFoorPart1 ends + a space of 6% the width of canvas
+		thirdFloorPart1.position.x = (myNameSpace.canvas.width * .06);
+
+		// position y is equal to 24% above ground level - the height of floor + an increase of i * .4 for each step
+		thirdFloorPart1.position.y = thirdFloorPart.position.y - (myNameSpace.canvas.height * (.1 + (i * .04)) - thirdFloorPart.height);
+		thirdFloorPart1.colour = "rgb(140, 70, 20)";
+		thirdFloorPart1.tag = "ladder";
+
+		// add floor part to the array of floor objects
+		myNameSpace.levelOne.floorObjects.push(thirdFloorPart1);
+		
+	} // for
 	
 }; // createThirdFloorLevel()
 
