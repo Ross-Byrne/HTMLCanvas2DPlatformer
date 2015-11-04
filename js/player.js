@@ -4,8 +4,11 @@
 // Setting it up, equals window(the open browser window).myNameSpace to itself if it's there or an empty object if it isn't
 window.myNameSpace = window.myNameSpace || { };
 
+
+////////////////////////////// Constructor //////////////////////////////
+
 // player object constructor
-window.myNameSpace.player = function player(){
+myNameSpace.player = function player(){
 	
 	////////////////////////////// Variables //////////////////////////////
 	

@@ -110,4 +110,7 @@ myNameSpace.startPage.startButtonClicked = function startButtonClicked(){
 	// place the players x axis at 5% of the canvas width into the game
 	myNameSpace.thePlayer.position.x = myNameSpace.canvas.width * .05;
 	
+	// start animating the levels coin
+	myNameSpace.levelOne.coin.isAnimated = true;
+	
 }; // startButtonClicked()

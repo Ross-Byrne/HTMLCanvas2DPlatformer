@@ -16,6 +16,12 @@ myNameSpace.deltaTime = 0;
 
 myNameSpace.time = performance || Date;
 
+// array to store game levels
+myNameSpace.levels = [];
+
+// var to keep track of the current level being played
+myNameSpace.currentLevel = 0;
+
 
 ////////////////////////////// main() //////////////////////////////
 
@@ -191,6 +197,9 @@ myNameSpace.gameOperations = function gameOperations(){
 	// update the players state
 	myNameSpace.thePlayer.update();
 	
+	// update the state of the level
+	myNameSpace.levels[myNameSpace.currentLevel].update();
+	
 	
 	////////////////////////////// Check Collisions //////////////////////////////
 	
@@ -224,12 +233,12 @@ myNameSpace.gameOperations = function gameOperations(){
 	} // if
 	
 	// check if player is colliding with the floor
-	var len = myNameSpace.levelOne.floorObjects.length;
+	var len = myNameSpace.levels[myNameSpace.currentLevel].floorObjects.length;
 	
 	for(var i = 0; i < len; ++i){
 		
 		// check collisions with floor objects
-		myNameSpace.thePlayer.collidingWithFloor(myNameSpace.levelOne.floorObjects[i]);
+		myNameSpace.thePlayer.collidingWithFloor(myNameSpace.levels[myNameSpace.currentLevel].floorObjects[i]);
 		
 	} // for
 	
@@ -242,7 +251,7 @@ myNameSpace.gameOperations = function gameOperations(){
 	// draws the objects to the screen
 	
 	// draw the level
-	myNameSpace.levelOne.drawLevel();
+	myNameSpace.levels[myNameSpace.currentLevel].drawLevel();
 	
 	// draw the player 
 	myNameSpace.thePlayer.draw();

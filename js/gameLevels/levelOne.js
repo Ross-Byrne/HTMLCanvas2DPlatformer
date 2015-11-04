@@ -18,10 +18,24 @@ myNameSpace.levelOne.floorObjects = [];
 myNameSpace.levelOne.groundLevelYAxis = 0;
 
 
+////////////////////////////// Objects //////////////////////////////
+
+// Some Objects that need to be kept track of
+
+// game coin
+myNameSpace.levelOne.coin = {};
+
+// game key
+myNameSpace.levelOne.key = {};
+
+
 ////////////////////////////// setUpLevel() //////////////////////////////
 
 // setup function that sets up the level
 myNameSpace.levelOne.setUpLevel = function setUpLevel(){
+	
+	// add the level to the level array
+	myNameSpace.levels.push(myNameSpace.levelOne);
 	
 	// creates the first floor layout for the level
 	myNameSpace.levelOne.createFloorLayout();
@@ -34,6 +48,9 @@ myNameSpace.levelOne.setUpLevel = function setUpLevel(){
 	
 	// creates the fourth level of floor layout
 	myNameSpace.levelOne.createFourthFloorLevel();
+	
+	// creates important objects
+	myNameSpace.levelOne.placeImportantObjects();
 	
 }; // setUpLevel()
 
@@ -51,7 +68,54 @@ myNameSpace.levelOne.drawLevel = function drawLevel(){
 		
 	} // for
 	
+	// draw the coin
+	myNameSpace.levelOne.coin.draw();
+	
 }; // drawLevel()
+
+
+////////////////////////////// update() //////////////////////////////
+
+// updates the state of the level
+
+myNameSpace.levelOne.update = function update(){
+	
+	myNameSpace.levelOne.coin.update();
+	
+}; // update()
+
+
+////////////////////////////// placeImportantObjects() //////////////////////////////
+
+// places important objects such as the coin, key
+myNameSpace.levelOne.placeImportantObjects = function placeImportantObjects(){
+	
+	// create the coin
+	myNameSpace.levelOne.coin = new myNameSpace.Coin();
+	
+	// set radius of coin
+	myNameSpace.levelOne.coin.radius = 12;
+	
+	// set X and Y position for coin
+	
+	// X position is = to the width of the canvas - 5% of the width of the canvas
+	myNameSpace.levelOne.coin.position.x = myNameSpace.canvas.width - (myNameSpace.canvas.width * .05);
+	
+	// Y position
+	myNameSpace.levelOne.coin.position.y = myNameSpace.levelOne.groundLevelYAxis - myNameSpace.levelOne.coin.radius - 18;
+	
+	// set the coins center Y Pos
+	myNameSpace.levelOne.coin.centerYPos = myNameSpace.levelOne.coin.position.y;
+	
+	// set the coins float radius to 2% the height of the canvas
+	myNameSpace.levelOne.coin.floatRadius = myNameSpace.canvas.height * .01;
+	
+	//myNameSpace.levelOne.coin.position.y = myNameSpace.levelOne.coin.centerYPos + myNameSpace.levelOne.coin.floatRadius;
+	
+	// set the coins y velocity
+	myNameSpace.levelOne.coin.velocity.y = 8;
+	
+};
 
 
 ////////////////////////////// createFloorLayout() //////////////////////////////
