@@ -100,15 +100,15 @@ myNameSpace.levelOne.placeImportantObjects = function placeImportantObjects(){
 	myNameSpace.levelOne.coin = new myNameSpace.gameObjects.Coin();
 	
 	// set radius of coin
-	myNameSpace.levelOne.coin.radius = 12;
+	myNameSpace.levelOne.coin.radius = 20;
 	
 	// set X and Y position for coin
 	
 	// X position is = to the width of the canvas - 5% of the width of the canvas
-	myNameSpace.levelOne.coin.position.x = myNameSpace.canvas.width - (myNameSpace.canvas.width * .05);
+	myNameSpace.levelOne.coin.position.x = myNameSpace.canvas.width - (myNameSpace.canvas.width * .08);
 	
 	// Y position
-	myNameSpace.levelOne.coin.position.y = myNameSpace.levelOne.groundLevelYAxis - myNameSpace.levelOne.coin.radius - 18;
+	myNameSpace.levelOne.coin.position.y = myNameSpace.levelOne.groundLevelYAxis - myNameSpace.levelOne.coin.radius - 26;
 	
 	// set the coins center Y Pos
 	myNameSpace.levelOne.coin.centerYPos = myNameSpace.levelOne.coin.position.y;

@@ -26,6 +26,9 @@ myNameSpace.gameObjects.Coin = function Coin(){
 	this.centerYPos = 0;
 	this.floatRadius = 0;
 	
+	this.img = new Image();
+	this.img.src = "resources/goldCoin/goldCoin10.png";
+	
 	
 	////////////////////////////// init() //////////////////////////////
 	
@@ -47,6 +50,9 @@ myNameSpace.gameObjects.Coin = function Coin(){
 	
 	// updates the state of the coin
 	this.update = function update(){
+		
+		var imageChangeSpeed = 10;
+		var noOfImages = 10;
 		
 		// if the coin is to be animated, animate it
 		if(this.isAnimated){
@@ -87,17 +93,9 @@ myNameSpace.gameObjects.Coin = function Coin(){
 	
 	// function to draw coin
 	this.draw = function draw() {
-			 
-		// sets colour for coin
-		myNameSpace.ctx.fillStyle = this.colour;
-			 
-		myNameSpace.ctx.beginPath();
-				
-		// draws circle 
-		myNameSpace.ctx.arc(this.position.x, this.position.y, this.radius, 0, 2 * Math.PI); 
-			 
-		// fill circles colour
-		myNameSpace.ctx.fill();
+		
+		// draw the coin image
+		myNameSpace.ctx.drawImage(this.img, this.position.x, this.position.y, this.radius * 2, this.radius * 2);
 			 
 	}; // draw()
 	
