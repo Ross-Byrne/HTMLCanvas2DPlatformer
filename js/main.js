@@ -196,6 +196,33 @@ myNameSpace.gameOperations = function gameOperations(){
 	
 	// checks collisions and runs required code
 	
+	// check if player is leaving the canvas on left side
+	if(myNameSpace.thePlayer.position.x <= 0){
+			
+		// stop player from falling off canvas
+		myNameSpace.thePlayer.position.x = 0;
+			
+	} // if
+		
+	// check if player is leaving canvas on right side
+	if(myNameSpace.thePlayer.position.x + myNameSpace.thePlayer.width >= myNameSpace.canvas.width){
+
+		// stop player from falling off canvas
+		myNameSpace.thePlayer.position.x = myNameSpace.canvas.width - myNameSpace.thePlayer.width;
+
+	} // if
+		
+	// check if the player is leaving top of canvas
+	if(myNameSpace.thePlayer.position.y <= 0){
+
+		// Hit roof, turn on gravity
+		myNameSpace.thePlayer.isGravity = true;
+
+		// make the player bounce off the roof of canvas
+		myNameSpace.thePlayer.velocity.y += 50;
+
+	} // if
+	
 	// check if player is colliding with the floor
 	var len = myNameSpace.levelOne.floorObjects.length;
 	

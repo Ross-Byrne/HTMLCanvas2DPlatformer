@@ -32,6 +32,9 @@ myNameSpace.levelOne.setUpLevel = function setUpLevel(){
 	// creates the third level of floor layout
 	myNameSpace.levelOne.createThirdFloorLevel();
 	
+	// creates the fourth level of floor layout
+	myNameSpace.levelOne.createFourthFloorLevel();
+	
 }; // setUpLevel()
 
 
@@ -195,15 +198,15 @@ myNameSpace.levelOne.createThirdFloorLevel = function createThirdFloorLevel(){
 	
 	thirdFloorPart.height = 30;
 	
-	// width of the object is 40% of the width of the canvas
+	// width of the object is 56% of the width of the canvas
 	thirdFloorPart.width = myNameSpace.canvas.width * .56;
 	
 	// set properties
 	
-	// start 60% of the way across the width of the canvas
+	// start 20% of the way across the width of the canvas
 	thirdFloorPart.position.x = (myNameSpace.canvas.width * .20);
 
-	// position y is equal to 40% above ground level
+	// position y is equal to 50% above ground level
 	thirdFloorPart.position.y = myNameSpace.levelOne.groundLevelYAxis - (myNameSpace.canvas.height * .5) - thirdFloorPart.height;
 	thirdFloorPart.colour = "rgb(70, 70, 70)";
 	thirdFloorPart.tag = "floor";
@@ -227,7 +230,7 @@ myNameSpace.levelOne.createThirdFloorLevel = function createThirdFloorLevel(){
 		// start where secondFoorPart1 ends + a space of 6% the width of canvas
 		thirdFloorPart1.position.x = (myNameSpace.canvas.width * .06);
 
-		// position y is equal to 24% above ground level - the height of floor + an increase of i * .4 for each step
+		// position y is equal to 10% above thirdFloorPart - the height of floor + an increase of i * .4 for each step
 		thirdFloorPart1.position.y = thirdFloorPart.position.y - (myNameSpace.canvas.height * (.1 + (i * .04)) - thirdFloorPart.height);
 		thirdFloorPart1.colour = "rgb(140, 70, 20)";
 		thirdFloorPart1.tag = "ladder";
@@ -238,4 +241,34 @@ myNameSpace.levelOne.createThirdFloorLevel = function createThirdFloorLevel(){
 	} // for
 	
 }; // createThirdFloorLevel()
+
+
+////////////////////////////// createFourthFloorLevel() //////////////////////////////
+
+myNameSpace.levelOne.createFourthFloorLevel = function createFourthFloorLevel(){
+	
+	// create a floor object
+	var fourthFloorPart = new myNameSpace.gameObjects.Rectangle();
+	
+	// set height and width
+	
+	fourthFloorPart.height = 30;
+	
+	// width of the object is 80% of the width of the canvas
+	fourthFloorPart.width = myNameSpace.canvas.width * .80;
+	
+	// set properties
+	
+	// start 20% of the way across the width of the canvas
+	fourthFloorPart.position.x = (myNameSpace.canvas.width * .20);
+
+	// position y is equal to 76% above ground level - height of floorPart
+	fourthFloorPart.position.y = myNameSpace.levelOne.groundLevelYAxis - (myNameSpace.canvas.height * .76) - fourthFloorPart.height;
+	fourthFloorPart.colour = "rgb(70, 70, 70)";
+	fourthFloorPart.tag = "floor";
+
+	// add floor part to the array of floor objects
+	myNameSpace.levelOne.floorObjects.push(fourthFloorPart);
+	
+}; // createFourthFloorLevel()
 
