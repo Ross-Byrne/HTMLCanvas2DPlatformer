@@ -71,16 +71,22 @@ myNameSpace.levelOne.drawLevel = function drawLevel(){
 	// draw the coin
 	myNameSpace.levelOne.coin.draw();
 	
+	// draw the key
+	myNameSpace.levelOne.key.draw();
+	
 }; // drawLevel()
 
 
 ////////////////////////////// update() //////////////////////////////
 
 // updates the state of the level
-
 myNameSpace.levelOne.update = function update(){
 	
+	// update the state of the coin
 	myNameSpace.levelOne.coin.update();
+	
+	// update the state of the key
+	myNameSpace.levelOne.key.update();
 	
 }; // update()
 
@@ -91,7 +97,7 @@ myNameSpace.levelOne.update = function update(){
 myNameSpace.levelOne.placeImportantObjects = function placeImportantObjects(){
 	
 	// create the coin
-	myNameSpace.levelOne.coin = new myNameSpace.Coin();
+	myNameSpace.levelOne.coin = new myNameSpace.gameObjects.Coin();
 	
 	// set radius of coin
 	myNameSpace.levelOne.coin.radius = 12;
@@ -107,15 +113,37 @@ myNameSpace.levelOne.placeImportantObjects = function placeImportantObjects(){
 	// set the coins center Y Pos
 	myNameSpace.levelOne.coin.centerYPos = myNameSpace.levelOne.coin.position.y;
 	
-	// set the coins float radius to 2% the height of the canvas
+	// set the coins float radius to 2=1% the height of the canvas
 	myNameSpace.levelOne.coin.floatRadius = myNameSpace.canvas.height * .01;
-	
-	//myNameSpace.levelOne.coin.position.y = myNameSpace.levelOne.coin.centerYPos + myNameSpace.levelOne.coin.floatRadius;
 	
 	// set the coins y velocity
 	myNameSpace.levelOne.coin.velocity.y = 8;
 	
-};
+	
+	// create the key
+	myNameSpace.levelOne.key = new myNameSpace.gameObjects.Key();
+	
+	// set the width and height
+	myNameSpace.levelOne.key.width = 40;
+	myNameSpace.levelOne.key.height = 20;
+	
+	// set the x and y position of key
+	
+	// width set to 90% the width of the canvas
+	myNameSpace.levelOne.key.position.x = myNameSpace.canvas.width - (myNameSpace.canvas.width * .08);
+	
+	myNameSpace.levelOne.key.position.y = myNameSpace.canvas.height * .08;
+	
+	// set the keys center Y Pos
+	myNameSpace.levelOne.key.centerYPos = myNameSpace.levelOne.key.position.y;
+	
+	// set the keys float radius to 1% the height of the canvas
+	myNameSpace.levelOne.key.floatRadius = myNameSpace.canvas.height * .01;
+	
+	// set the key y velocity
+	myNameSpace.levelOne.key.velocity.y = 8;
+	
+}; // placeImportantObjects()
 
 
 ////////////////////////////// createFloorLayout() //////////////////////////////

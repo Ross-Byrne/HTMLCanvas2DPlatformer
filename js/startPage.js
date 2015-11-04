@@ -113,4 +113,7 @@ myNameSpace.startPage.startButtonClicked = function startButtonClicked(){
 	// start animating the levels coin
 	myNameSpace.levelOne.coin.isAnimated = true;
 	
+	// start animating the levels key
+	myNameSpace.levelOne.key.isAnimated = true;
+	
 }; // startButtonClicked()
