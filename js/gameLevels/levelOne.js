@@ -106,6 +106,23 @@ myNameSpace.levelOne.update = function update(){
 	// update moving wall 2
 	this.movingWall2.update();
 	
+	// if the key is collected
+	if(this.key.isCollected){
+		
+		// activate the first wall to shrink it
+		this.movingWall1.wallIsGrowing = false;
+		
+		// start the walls animation
+		this.movingWall1.isAnimated = true;
+		
+		// activate the second wall to block the player
+		this.movingWall2.wallIsGrowing = true;
+		
+		// start the walls animation
+		this.movingWall2.isAnimated = true;
+		
+	} // if
+	
 }; // update()
 
 
@@ -119,8 +136,10 @@ myNameSpace.levelOne.placeImportantObjects = function placeImportantObjects(){
 	// create the coin
 	this.coin = new myNameSpace.gameObjects.Coin();
 	
-	// set radius of coin
-	this.coin.radius = 20;
+	// set width and height
+	
+	this.coin.width = 40;
+	this.coin.height = 40;
 	
 	// set X and Y position for coin
 	
@@ -128,7 +147,7 @@ myNameSpace.levelOne.placeImportantObjects = function placeImportantObjects(){
 	this.coin.position.x = myNameSpace.canvas.width - (myNameSpace.canvas.width * .08);
 	
 	// Y position
-	this.coin.position.y = this.groundLevelYAxis - this.coin.radius - 26;
+	this.coin.position.y = this.groundLevelYAxis - this.coin.height - 10;
 	
 	// set the coins center Y Pos
 	this.coin.centerYPos = this.coin.position.y;

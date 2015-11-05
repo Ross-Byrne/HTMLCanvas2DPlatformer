@@ -478,12 +478,10 @@ myNameSpace.player = function player(){
 			   this.position.y + this.height > collectable.position.y &&
 			   this.position.y < collectable.position.y + collectable.height){
 
-				console.log("Collect!");
-
 				// collect the item
 				collectable.isCollected = true;
 
-			} // if	
+			} // if
 			
 		} // if
 		

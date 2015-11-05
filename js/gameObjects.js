@@ -15,7 +15,8 @@ myNameSpace.gameObjects.Coin = function Coin(){
 	
 	////////////////////////////// Variables //////////////////////////////
 	
-	this.radius = 0;
+	this.width = 0;
+	this.height = 0;
 	this.position = { x: 0, y: 0 };
 	this.velocity = { x: 0, y: 0 };
 	this.colour = "rgb(255, 230, 50)";
@@ -30,29 +31,10 @@ myNameSpace.gameObjects.Coin = function Coin(){
 	this.img.src = "resources/goldCoin/goldCoin10.png";
 	
 	
-	////////////////////////////// init() //////////////////////////////
-	
-	// initialises objects variables
-	this.init = function init(r, posx, posy, velx, vely, colour, tag){
-		
-		this.radius = r;
-		this.position = { x: posx, y: posy };
-		this.velocity = { x: velx, y: vely };
-		this.colour = colour;
-		this.tag = tag;
-		
-		this.centerYPos = posy;
-		
-	}; // init()
-	
-	
 	////////////////////////////// update() //////////////////////////////
 	
 	// updates the state of the coin
 	this.update = function update(){
-		
-		var imageChangeSpeed = 10;
-		var noOfImages = 10;
 		
 		// if the coin is to be animated, animate it
 		if(this.isAnimated && !this.isCollected){
@@ -97,7 +79,7 @@ myNameSpace.gameObjects.Coin = function Coin(){
 		if(!this.isCollected){
 			
 			// draw the coin image
-			myNameSpace.ctx.drawImage(this.img, this.position.x, this.position.y, this.radius * 2, this.radius * 2);
+			myNameSpace.ctx.drawImage(this.img, this.position.x, this.position.y, this.width, this.height);
 			
 		} // if
 			 
@@ -320,27 +302,6 @@ myNameSpace.gameObjects.Rectangle = function Rectangle(){
 		myNameSpace.ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
 	
 	}; // draw()
-
-	
-	////////////////////////////// rectCircleColliding() //////////////////////////////
-	
-	// return true if the rectangle and circle are colliding
-	this.rectCircleColliding = function rectCircleColliding(circle){
-
-		var distX = Math.abs(circle.position.x - this.position.x - this.width / 2);
-		var distY = Math.abs(circle.position.y - this.position.y - this.height / 2);
-
-		if (distX > (this.width / 2 + circle.radius)) { return -1; }
-		if (distY > (this.height / 2 + circle.radius)) { return -1; }
-
-		if (distX <= (this.width / 2)) { return true; } 
-		if (distY <= (this.height / 2)) { return true; }
-
-		var dx = distX - this.width / 2;
-		var dy = distY - this.height / 2;
-		return (dx * dx + dy * dy <= (circle.radius * circle.radius));
-		
-	}; // rectCircleColliding()
 
 }; // Rectanle Object
 
