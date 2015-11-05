@@ -44,19 +44,19 @@ myNameSpace.levelOne.setUpLevel = function setUpLevel(){
 	myNameSpace.levels.push(myNameSpace.levelOne);
 	
 	// creates the first floor layout for the level
-	myNameSpace.levelOne.createFloorLayout();
+	this.createFloorLayout();
 	
 	// creates the second level of floor layout for level
-	myNameSpace.levelOne.createSecondFloorLevel();
+	this.createSecondFloorLevel();
 	
 	// creates the third level of floor layout
-	myNameSpace.levelOne.createThirdFloorLevel();
+	this.createThirdFloorLevel();
 	
 	// creates the fourth level of floor layout
-	myNameSpace.levelOne.createFourthFloorLevel();
+	this.createFourthFloorLevel();
 	
 	// creates important objects
-	myNameSpace.levelOne.placeImportantObjects();
+	this.placeImportantObjects();
 	
 }; // setUpLevel()
 
@@ -67,18 +67,18 @@ myNameSpace.levelOne.setUpLevel = function setUpLevel(){
 myNameSpace.levelOne.drawLevel = function drawLevel(){
 	
 	// draw floor objects
-	for(var i = 0; i < myNameSpace.levelOne.floorObjects.length; ++i){
+	for(var i = 0; i < this.floorObjects.length; ++i){
 		
 		// draw all floor objects
-		myNameSpace.levelOne.floorObjects[i].draw();
+		this.floorObjects[i].draw();
 		
 	} // for
 	
 	// draw the coin
-	myNameSpace.levelOne.coin.draw();
+	this.coin.draw();
 	
 	// draw the key
-	myNameSpace.levelOne.key.draw();
+	this.key.draw();
 	
 	// draw movingWall1
 	this.movingWall1.draw();
@@ -92,10 +92,10 @@ myNameSpace.levelOne.drawLevel = function drawLevel(){
 myNameSpace.levelOne.update = function update(){
 	
 	// update the state of the coin
-	myNameSpace.levelOne.coin.update();
+	this.coin.update();
 	
 	// update the state of the key
-	myNameSpace.levelOne.key.update();
+	this.key.update();
 	
 	// update movingWall1
 	this.movingWall1.update();
@@ -109,71 +109,71 @@ myNameSpace.levelOne.update = function update(){
 myNameSpace.levelOne.placeImportantObjects = function placeImportantObjects(){
 	
 	// create the coin
-	myNameSpace.levelOne.coin = new myNameSpace.gameObjects.Coin();
+	this.coin = new myNameSpace.gameObjects.Coin();
 	
 	// set radius of coin
-	myNameSpace.levelOne.coin.radius = 20;
+	this.coin.radius = 20;
 	
 	// set X and Y position for coin
 	
 	// X position is = to the width of the canvas - 5% of the width of the canvas
-	myNameSpace.levelOne.coin.position.x = myNameSpace.canvas.width - (myNameSpace.canvas.width * .08);
+	this.coin.position.x = myNameSpace.canvas.width - (myNameSpace.canvas.width * .08);
 	
 	// Y position
-	myNameSpace.levelOne.coin.position.y = myNameSpace.levelOne.groundLevelYAxis - myNameSpace.levelOne.coin.radius - 26;
+	this.coin.position.y = this.groundLevelYAxis - this.coin.radius - 26;
 	
 	// set the coins center Y Pos
-	myNameSpace.levelOne.coin.centerYPos = myNameSpace.levelOne.coin.position.y;
+	this.coin.centerYPos = this.coin.position.y;
 	
 	// set the coins float radius to 2=1% the height of the canvas
-	myNameSpace.levelOne.coin.floatRadius = myNameSpace.canvas.height * .01;
+	this.coin.floatRadius = myNameSpace.canvas.height * .01;
 	
 	// set the coins y velocity
-	myNameSpace.levelOne.coin.velocity.y = 8;
+	this.coin.velocity.y = 8;
 	
 	
 	// create the key
-	myNameSpace.levelOne.key = new myNameSpace.gameObjects.Key();
+	this.key = new myNameSpace.gameObjects.Key();
 	
 	// set the width and height
-	myNameSpace.levelOne.key.width = 40;
-	myNameSpace.levelOne.key.height = 20;
+	this.key.width = 40;
+	this.key.height = 20;
 	
 	// set the x and y position of key
 	
 	// width set to 90% the width of the canvas
-	myNameSpace.levelOne.key.position.x = myNameSpace.canvas.width - (myNameSpace.canvas.width * .08);
+	this.key.position.x = myNameSpace.canvas.width - (myNameSpace.canvas.width * .08);
 	
-	myNameSpace.levelOne.key.position.y = myNameSpace.canvas.height * .08;
+	this.key.position.y = myNameSpace.canvas.height * .08;
 	
 	// set the keys center Y Pos
-	myNameSpace.levelOne.key.centerYPos = myNameSpace.levelOne.key.position.y;
+	this.key.centerYPos = this.key.position.y;
 	
 	// set the keys float radius to 1% the height of the canvas
-	myNameSpace.levelOne.key.floatRadius = myNameSpace.canvas.height * .01;
+	this.key.floatRadius = myNameSpace.canvas.height * .01;
 	
 	// set the key y velocity
-	myNameSpace.levelOne.key.velocity.y = 8;
+	this.key.velocity.y = 8;
 	
 	
 	// create moving wall 1
-	myNameSpace.levelOne.movingWall1 = new myNameSpace.gameObjects.MoveableWall();
+	this.movingWall1 = new myNameSpace.gameObjects.MoveableWall();
 	
 	// set width and height
 	
-	myNameSpace.levelOne.movingWall1.height = 0;
-	myNameSpace.levelOne.movingWall1.width = 30;
+	this.movingWall1.height = 0;
+	this.movingWall1.width = 30;
 	
 	// set position X and Y
 	
-	myNameSpace.levelOne.movingWall1.position.x = myNameSpace.canvas.width * .85;
-	myNameSpace.levelOne.movingWall1.position.y = myNameSpace.levelOne.groundLevelYAxis - myNameSpace.levelOne.movingWall1.height;
+	this.movingWall1.position.x = myNameSpace.canvas.width * .85;
+	this.movingWall1.position.y = this.groundLevelYAxis - this.movingWall1.height;
 	
 	// set the maxHeight the wall will move to, to 18% the height of the canvas
-	myNameSpace.levelOne.movingWall1.maxHeight = myNameSpace.canvas.height * .18;
+	this.movingWall1.maxHeight = myNameSpace.canvas.height * .18;
 	
 	// set the starting Y pos
-	myNameSpace.levelOne.movingWall1.startingYPoint = this.movingWall1.position.y;
+	this.movingWall1.startingYPoint = this.movingWall1.position.y;
 	
 	// set the moving speed of the wall
 	this.movingWall1.growthSpeed = 42;
@@ -190,8 +190,7 @@ myNameSpace.levelOne.placeImportantObjects = function placeImportantObjects(){
 myNameSpace.levelOne.createFloorLayout = function createFloorLayout(){
 
 	// create rectangle object
-	myNameSpace.levelOne.groundLevelFloor = new myNameSpace.gameObjects.Rectangle();
-	var groundLevelFloor = myNameSpace.levelOne.groundLevelFloor;
+	var groundLevelFloor = new myNameSpace.gameObjects.Rectangle();
 	
 	// set width to the width of the canvas
 	groundLevelFloor.width = myNameSpace.canvas.width;
@@ -204,10 +203,10 @@ myNameSpace.levelOne.createFloorLayout = function createFloorLayout(){
 	groundLevelFloor.tag = "floor";
 	
 	// save the games groundLevelYAxis
-	myNameSpace.levelOne.groundLevelYAxis = groundLevelFloor.position.y;
+	this.groundLevelYAxis = groundLevelFloor.position.y;
 	
 	// add groundFloor to array of floor objects
-	myNameSpace.levelOne.floorObjects.push(groundLevelFloor);
+	this.floorObjects.push(groundLevelFloor);
 	
 	
 	// create level part 1
@@ -217,12 +216,12 @@ myNameSpace.levelOne.createFloorLayout = function createFloorLayout(){
 	floorPart.width = myNameSpace.canvas.width * .25; // 25% the width of the canvas
 	
 	floorPart.position.x = (myNameSpace.canvas.width * .6); // start drawing object 60% the length of the canvas from left side
-	floorPart.position.y = myNameSpace.levelOne.groundLevelYAxis - floorPart.height;
+	floorPart.position.y = this.groundLevelYAxis - floorPart.height;
 	floorPart.colour = "rgb(70, 70, 70)";
 	floorPart.tag = "floor";
 	
 	// add floor part to array of floor parts
-	myNameSpace.levelOne.floorObjects.push(floorPart);
+	this.floorObjects.push(floorPart);
 	
 	// create floor part 2
 	var floorPart1 = new myNameSpace.gameObjects.Rectangle();
@@ -236,7 +235,7 @@ myNameSpace.levelOne.createFloorLayout = function createFloorLayout(){
 	floorPart1.tag = "floor";
 	
 	// add floorPart1 to array of floor Objects
-	myNameSpace.levelOne.floorObjects.push(floorPart1);
+	this.floorObjects.push(floorPart1);
 	
 }; // createFloorLayout()
 
@@ -246,7 +245,7 @@ myNameSpace.levelOne.createFloorLayout = function createFloorLayout(){
 myNameSpace.levelOne.createSecondFloorLevel = function createSecondFloorLevel(){
 	
 	// get current ground level
-	var curGroundLevel = myNameSpace.levelOne.groundLevelYAxis;
+	var curGroundLevel = this.groundLevelYAxis;
 	
 	// create floor part
 	var secondFloorPart = new myNameSpace.gameObjects.Rectangle();
@@ -264,7 +263,8 @@ myNameSpace.levelOne.createSecondFloorLevel = function createSecondFloorLevel(){
 	secondFloorPart.tag = "floor";
 	
 	// add floor part to the array of floor objects
-	myNameSpace.levelOne.floorObjects.push(secondFloorPart);
+	this.floorObjects.push(secondFloorPart);
+	
 	
 	// create another floor part
 	var secondFloorPart1 = new myNameSpace.gameObjects.Rectangle();
@@ -285,7 +285,7 @@ myNameSpace.levelOne.createSecondFloorLevel = function createSecondFloorLevel(){
 	secondFloorPart1.tag = "floor";
 	
 	// add floor part to the array of floor objects
-	myNameSpace.levelOne.floorObjects.push(secondFloorPart1);
+	this.floorObjects.push(secondFloorPart1);
 	
 
 	// create a ladder using a loop
@@ -310,7 +310,7 @@ myNameSpace.levelOne.createSecondFloorLevel = function createSecondFloorLevel(){
 		secondFloorPart2.tag = "ladder";
 
 		// add floor part to the array of floor objects
-		myNameSpace.levelOne.floorObjects.push(secondFloorPart2);
+		this.floorObjects.push(secondFloorPart2);
 		
 	} // for
 	
@@ -337,12 +337,12 @@ myNameSpace.levelOne.createThirdFloorLevel = function createThirdFloorLevel(){
 	thirdFloorPart.position.x = (myNameSpace.canvas.width * .20);
 
 	// position y is equal to 50% above ground level
-	thirdFloorPart.position.y = myNameSpace.levelOne.groundLevelYAxis - (myNameSpace.canvas.height * .5) - thirdFloorPart.height;
+	thirdFloorPart.position.y = this.groundLevelYAxis - (myNameSpace.canvas.height * .5) - thirdFloorPart.height;
 	thirdFloorPart.colour = "rgb(70, 70, 70)";
 	thirdFloorPart.tag = "floor";
 
 	// add floor part to the array of floor objects
-	myNameSpace.levelOne.floorObjects.push(thirdFloorPart);
+	this.floorObjects.push(thirdFloorPart);
 	
 	// create a ladder using a loop
 	// loop 6 times to make 6 ladder steps
@@ -366,7 +366,7 @@ myNameSpace.levelOne.createThirdFloorLevel = function createThirdFloorLevel(){
 		thirdFloorPart1.tag = "ladder";
 
 		// add floor part to the array of floor objects
-		myNameSpace.levelOne.floorObjects.push(thirdFloorPart1);
+		this.floorObjects.push(thirdFloorPart1);
 		
 	} // for
 	
@@ -393,12 +393,12 @@ myNameSpace.levelOne.createFourthFloorLevel = function createFourthFloorLevel(){
 	fourthFloorPart.position.x = (myNameSpace.canvas.width * .20);
 
 	// position y is equal to 76% above ground level - height of floorPart
-	fourthFloorPart.position.y = myNameSpace.levelOne.groundLevelYAxis - (myNameSpace.canvas.height * .76) - fourthFloorPart.height;
+	fourthFloorPart.position.y = this.groundLevelYAxis - (myNameSpace.canvas.height * .76) - fourthFloorPart.height;
 	fourthFloorPart.colour = "rgb(70, 70, 70)";
 	fourthFloorPart.tag = "floor";
 
 	// add floor part to the array of floor objects
-	myNameSpace.levelOne.floorObjects.push(fourthFloorPart);
+	this.floorObjects.push(fourthFloorPart);
 	
 }; // createFourthFloorLevel()
 

@@ -198,6 +198,9 @@ myNameSpace.gameObjects.MoveableWall = function MoveableWall(){
 	this.maxHeight = 0;
 	this.growthSpeed = 50;
 	
+	// if true, the wall grows, if false, the wall shrinks
+	this.wallIsGrowing = true; // true by default
+	
 	
 	////////////////////////////// update() //////////////////////////////
 	
@@ -205,8 +208,8 @@ myNameSpace.gameObjects.MoveableWall = function MoveableWall(){
 	this.update = function update(){
 		
 		// if the wall is to be animated, animate it
-		if(this.isAnimated){
-		
+		if(this.isAnimated && this.wallIsGrowing){ // and if the wall is growing
+			
 			// increase the height of the wall using deltaTime
 			this.height += this.growthSpeed * myNameSpace.deltaTime;
 			
@@ -218,13 +221,35 @@ myNameSpace.gameObjects.MoveableWall = function MoveableWall(){
 				
 				// set it to limit
 				this.height = this.maxHeight;
-				
+
 				// keep the wall grounded at its starting point
 				this.position.y = (this.startingYPoint - this.height);
-				
+
 				// animation complete, stop animating
 				this.isAnimated = false;
-			
+				
+			} // if
+				
+		} else if(this.isAnimated && !this.wallIsGrowing){ // if the wall is shrinking
+
+			// decrease the height of the wall using deltaTime
+			this.height -= this.growthSpeed * myNameSpace.deltaTime;
+
+			// keep the wall grounded at its starting point
+			this.position.y = (this.startingYPoint - this.height);
+
+			// if the wall gets smaller then 0
+			if(this.height < 0){
+
+				// set it to 0
+				this.height = 0;
+
+				// keep the wall grounded at its starting point
+				this.position.y = (this.startingYPoint - this.height);
+
+				// animation complete, stop animating
+				this.isAnimated = false;
+				
 			} // if
 				
 		} // if
