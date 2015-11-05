@@ -116,4 +116,6 @@ myNameSpace.startPage.startButtonClicked = function startButtonClicked(){
 	// start animating the levels key
 	myNameSpace.levelOne.key.isAnimated = true;
 	
+	myNameSpace.levelOne.movingWall1.isAnimated = true;
+	
 }; // startButtonClicked()

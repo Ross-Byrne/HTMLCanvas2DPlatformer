@@ -8,7 +8,7 @@ window.myNameSpace = window.myNameSpace || { };
 window.myNameSpace.gameObjects = { };
 
 
-////////////////////////////// Coin //////////////////////////////
+////////////////////////////// Coin Object //////////////////////////////
 
 // coin object constructor
 myNameSpace.gameObjects.Coin = function Coin(){
@@ -102,7 +102,7 @@ myNameSpace.gameObjects.Coin = function Coin(){
 }; // coin Object
 
 
-////////////////////////////// Key //////////////////////////////
+////////////////////////////// Key Object //////////////////////////////
 
 // key object constructor
 myNameSpace.gameObjects.Key = function Key(){
@@ -177,6 +177,75 @@ myNameSpace.gameObjects.Key = function Key(){
 	}; // draw()
 	
 }; // key Object
+
+
+////////////////////////////// MoveableWall Object //////////////////////////////
+
+// Constructor for MoveableWall
+myNameSpace.gameObjects.MoveableWall = function MoveableWall(){
+
+	////////////////////////////// Variables //////////////////////////////
+	
+	this.position = {x: 0, y: 0};
+	this.velocity = {x: 0, y: 0};
+	this.width = 30;
+	this.height = 0;
+	this.colour = "rgb(0, 0, 0)";
+	this.tag = "wall";
+	
+	this.isAnimated = false;
+	this.startingYPoint = 0;
+	this.maxHeight = 0;
+	this.growthSpeed = 50;
+	
+	
+	////////////////////////////// update() //////////////////////////////
+	
+	// updates the state of the wall
+	this.update = function update(){
+		
+		// if the wall is to be animated, animate it
+		if(this.isAnimated){
+		
+			// increase the height of the wall using deltaTime
+			this.height += this.growthSpeed * myNameSpace.deltaTime;
+			
+			// keep the wall grounded at its starting point
+			this.position.y = (this.startingYPoint - this.height);
+			
+			// if the wall moves above the height it's allowed
+			if(this.height > this.maxHeight){
+				
+				// set it to limit
+				this.height = this.maxHeight;
+				
+				// keep the wall grounded at its starting point
+				this.position.y = (this.startingYPoint - this.height);
+				
+				// animation complete, stop animating
+				this.isAnimated = false;
+			
+			} // if
+				
+		} // if
+		
+	}; // update()
+	
+	
+	////////////////////////////// draw() //////////////////////////////
+	
+	// draws the object to the canvas
+	this.draw = function draw(){
+
+		// set colour for wall
+		myNameSpace.ctx.fillStyle = this.colour;
+
+		// draw
+		myNameSpace.ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+	
+	}; // draw()
+
+}; // MoveableWall Object
 
 
 ////////////////////////////// Rectangle Object //////////////////////////////

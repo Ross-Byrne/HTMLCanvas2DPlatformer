@@ -28,6 +28,12 @@ myNameSpace.levelOne.coin = {};
 // game key
 myNameSpace.levelOne.key = {};
 
+// moving wall 1
+myNameSpace.levelOne.movingWall1 = {};
+
+// moving wall 2
+myNameSpace.levelOne.movingWall2 = {};
+
 
 ////////////////////////////// setUpLevel() //////////////////////////////
 
@@ -74,6 +80,9 @@ myNameSpace.levelOne.drawLevel = function drawLevel(){
 	// draw the key
 	myNameSpace.levelOne.key.draw();
 	
+	// draw movingWall1
+	this.movingWall1.draw();
+	
 }; // drawLevel()
 
 
@@ -87,6 +96,9 @@ myNameSpace.levelOne.update = function update(){
 	
 	// update the state of the key
 	myNameSpace.levelOne.key.update();
+	
+	// update movingWall1
+	this.movingWall1.update();
 	
 }; // update()
 
@@ -142,6 +154,32 @@ myNameSpace.levelOne.placeImportantObjects = function placeImportantObjects(){
 	
 	// set the key y velocity
 	myNameSpace.levelOne.key.velocity.y = 8;
+	
+	
+	// create moving wall 1
+	myNameSpace.levelOne.movingWall1 = new myNameSpace.gameObjects.MoveableWall();
+	
+	// set width and height
+	
+	myNameSpace.levelOne.movingWall1.height = 0;
+	myNameSpace.levelOne.movingWall1.width = 30;
+	
+	// set position X and Y
+	
+	myNameSpace.levelOne.movingWall1.position.x = myNameSpace.canvas.width * .85;
+	myNameSpace.levelOne.movingWall1.position.y = myNameSpace.levelOne.groundLevelYAxis - myNameSpace.levelOne.movingWall1.height;
+	
+	// set the maxHeight the wall will move to, to 18% the height of the canvas
+	myNameSpace.levelOne.movingWall1.maxHeight = myNameSpace.canvas.height * .18;
+	
+	// set the starting Y pos
+	myNameSpace.levelOne.movingWall1.startingYPoint = this.movingWall1.position.y;
+	
+	// set the moving speed of the wall
+	this.movingWall1.growthSpeed = 42;
+	
+	// set the colour
+	this.movingWall1.colour = "rgb(70, 70, 70)";
 	
 }; // placeImportantObjects()
 
