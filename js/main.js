@@ -243,6 +243,15 @@ myNameSpace.gameOperations = function gameOperations(){
 	} // for
 	
 	
+	// check if the player is colliding with a collectable
+	
+	// check if colliding with coin
+	myNameSpace.thePlayer.collidingWithCollectable(myNameSpace.levels[this.currentLevel].coin);
+	
+	// check if colliding with key
+	myNameSpace.thePlayer.collidingWithCollectable(myNameSpace.levels[this.currentLevel].key);
+	
+	
 	////////////////////////////// Render Objects //////////////////////////////
 	
 	// clear the canvas so the object can be redrawn

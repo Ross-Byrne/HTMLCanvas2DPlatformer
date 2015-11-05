@@ -55,7 +55,7 @@ myNameSpace.gameObjects.Coin = function Coin(){
 		var noOfImages = 10;
 		
 		// if the coin is to be animated, animate it
-		if(this.isAnimated){
+		if(this.isAnimated && !this.isCollected){
 			
 			// if the coin floats above the height it's allowed
 			if(this.position.y < this.centerYPos - this.floatRadius){
@@ -94,8 +94,12 @@ myNameSpace.gameObjects.Coin = function Coin(){
 	// function to draw coin
 	this.draw = function draw() {
 		
-		// draw the coin image
-		myNameSpace.ctx.drawImage(this.img, this.position.x, this.position.y, this.radius * 2, this.radius * 2);
+		if(!this.isCollected){
+			
+			// draw the coin image
+			myNameSpace.ctx.drawImage(this.img, this.position.x, this.position.y, this.radius * 2, this.radius * 2);
+			
+		} // if
 			 
 	}; // draw()
 	
@@ -131,7 +135,7 @@ myNameSpace.gameObjects.Key = function Key(){
 	this.update = function update(){
 		
 		// if the key is to be animated, animate it
-		if(this.isAnimated){
+		if(this.isAnimated && !this.isCollected){
 			
 			// if the key floats above the height it's allowed
 			if(this.position.y < this.centerYPos - this.floatRadius){
@@ -171,8 +175,11 @@ myNameSpace.gameObjects.Key = function Key(){
 	// function to draw key
 	this.draw = function draw() {
 		
-		// draw the key image
-		myNameSpace.ctx.drawImage(this.img, this.position.x, this.position.y, this.width, this.height);
+		if(!this.isCollected){
+			
+			// draw the key image
+			myNameSpace.ctx.drawImage(this.img, this.position.x, this.position.y, this.width, this.height);
+		} // if
 			 
 	}; // draw()
 	

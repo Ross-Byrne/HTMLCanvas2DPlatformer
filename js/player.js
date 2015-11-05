@@ -391,8 +391,9 @@ myNameSpace.player = function player(){
 				
 			} // if
 			
-			// check to see if the player collided with a floor object
-			if(floorObject.tag == "floor"){
+			// check to see if the player collided with a floor or wall object
+			if(floorObject.tag == "floor" || floorObject.tag == "wall"){
+				
 				var wy = w * dy;
 				var hx = h * dx;
 
@@ -400,7 +401,7 @@ myNameSpace.player = function player(){
 				// was collided with
 				if (wy > hx){
 
-					if (wy > -hx){ // collision at the top
+					if (wy > -hx){ // collision at the top of player
 						
 						// Hit roof, turn on gravity
 						this.isGravity = true;
@@ -408,7 +409,7 @@ myNameSpace.player = function player(){
 						// make them bounce off something above the player
 						this.velocity.y += 50;
 
-					} else { // on the right
+					} else { // on the right side of the player
 
 						// hitting wall, turn on gravity
 						this.isGravity = true;
@@ -424,7 +425,7 @@ myNameSpace.player = function player(){
 
 				} else {
 
-					if (wy > -hx) { // on the left side
+					if (wy > -hx) { // on the left side of player
 
 						// hitting wall, turn on gravity
 						this.isGravity = true;
@@ -437,7 +438,7 @@ myNameSpace.player = function player(){
 
 						} // if
 
-					} else { // at the bottom
+					} else { // at the bottom of player
 
 						// on floor, turn off gravity
 						this.isGravity = false;
@@ -461,6 +462,32 @@ myNameSpace.player = function player(){
 		} // if
 		
 	}; // collidingWithFloor()
+	
+	
+	////////////////////////////// collidingWithCollectable() //////////////////////////////
+	
+	// checks if the player is colliding with a collectable
+	this.collidingWithCollectable = function collidingWithCollectable(collectable){
+		
+		// check if the collectable isn't collected
+		if(!collectable.isCollected){
+			
+			// check to see if the player collides with a collectable
+			if(this.position.x + this.width > collectable.position.x &&
+			   this.position.x < collectable.position.x + collectable.width &&
+			   this.position.y + this.height > collectable.position.y &&
+			   this.position.y < collectable.position.y + collectable.height){
+
+				console.log("Collect!");
+
+				// collect the item
+				collectable.isCollected = true;
+
+			} // if	
+			
+		} // if
+		
+	}; // collidingWithCollectable()
 	
 }; // Player Object
 
