@@ -225,18 +225,6 @@ myNameSpace.player = function player(){
 		var bodyRadius = bodyHeight / 2; // radius is based on amount of height allocated
 		var bodyYStartingPoint = this.position.y + (this.height * this.hatSizePercent) + (this.height * this.headSizePercent); // because body is drawn under head
 		
-		// set colour for head
-		/*myNameSpace.ctx.fillStyle = this.playerColour.body;
-			 
-		// start drawing circle
-		myNameSpace.ctx.beginPath();
-				
-		// draws circle 
-		myNameSpace.ctx.arc(this.position.x + (bodyWidth / 2), bodyYStartingPoint + bodyRadius, bodyRadius, 0, 2 * Math.PI); 
-			 
-		// fill circles colour
-		myNameSpace.ctx.fill();*/
-		
 		// initialise the players body
 		// function ref: init(r, posx, posy, velx, vely, a, colour, tag)
 		this.playerBody.init(bodyRadius, this.position.x + (bodyWidth / 2), bodyYStartingPoint + bodyRadius,

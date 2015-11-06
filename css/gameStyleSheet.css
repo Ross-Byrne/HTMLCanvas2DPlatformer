@@ -9,3 +9,8 @@ canvas {
 	margin-bottom: auto;
 	display: block;
 }
+
+p {
+	padding-left: 10%;
+	padding-right: 10%;
+}

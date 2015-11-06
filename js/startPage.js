@@ -26,7 +26,11 @@ myNameSpace.startPage.startButton = null;
 myNameSpace.startPage.headingText = "Gambler's Gambit";
 
 // paragraph text
-myNameSpace.startPage.paraText = "Welcome to Gambler's Gambit. This is currently a work in progress!";
+myNameSpace.startPage.paraText = "Welcome to Gambler's Gambit." +
+									" You play as a gambler who has sold his soul to the devil for just a few more coins to play in the slot machines!" + 
+									" Your goal is to collect all of the coins." +
+									" Controls: Spacebar is to jump, the left and right Arrow keys are to move left and right, and the up and down Arrow keys are" +
+									" for climbing up and down ladders! Good luck!";
 
 // start button's text
 myNameSpace.startPage.startButtonText = "Play Game";
@@ -35,8 +39,7 @@ myNameSpace.startPage.startButtonText = "Play Game";
 ////////////////////////////// Functions //////////////////////////////
 
 // initialises the start page
-// takes the div that the page is going to be put in as a param
-myNameSpace.startPage.init = function init(startingDiv){
+myNameSpace.startPage.init = function init(){
 	
 	// create game heading element
 	myNameSpace.startPage.gameHeading = myNameSpace.tools.createHTMLElement("h1", myNameSpace.startPage.headingText);
@@ -45,7 +48,7 @@ myNameSpace.startPage.init = function init(startingDiv){
 	myNameSpace.startPage.gameHeading.style.textAlign = "center";
 	
 	// add the page heading to the div
-	startingDiv.appendChild(myNameSpace.startPage.gameHeading);
+	myNameSpace.theDiv.appendChild(myNameSpace.startPage.gameHeading);
 	
 	// create paragraph element
 	myNameSpace.startPage.para = myNameSpace.tools.createHTMLElement("p", myNameSpace.startPage.paraText);
@@ -64,16 +67,44 @@ myNameSpace.startPage.init = function init(startingDiv){
 	
 	// add attributes to button
 	
-	// add id to button
-	//myNameSpace.tools.addAttribute(myNameSpace.startPage.startButton, "id", "startButton");
-	
 	// add an onclick function to button
 	myNameSpace.tools.addAttribute(myNameSpace.startPage.startButton, "onclick", "myNameSpace.startPage.startButtonClicked()");
 	
 	// add button to main div
-	theDiv.appendChild(myNameSpace.startPage.startButton);
-	
+	myNameSpace.theDiv.appendChild(myNameSpace.startPage.startButton);
+		
 }; // init()
+
+
+////////////////////////////// pageIsVisable() //////////////////////////////
+
+// function that either shows or hides the startPage
+// pass in a boolean to decide to show page or not
+myNameSpace.startPage.pageIsVisable = function pageIsVisable(isVisable){
+	
+	// if page is meant to be shown
+	if(isVisable){
+		
+		// show game heading
+		//myNameSpace.startPage.gameHeading.style.display = "block";
+
+		// show game paragraph
+		myNameSpace.startPage.para.style.display = "block";
+
+		// show start game button
+		myNameSpace.startPage.startButton.style.display = "block";
+		
+	} else {
+		
+		// hide game paragraph
+		myNameSpace.startPage.para.style.display = "none";
+
+		// hide start game button
+		myNameSpace.startPage.startButton.style.display = "none";
+		
+	} // if
+
+}; // pageIsVisable()
 
 
 ////////////////////////////// startButtonClicked() //////////////////////////////
@@ -81,22 +112,11 @@ myNameSpace.startPage.init = function init(startingDiv){
 // function that is called when the playButton is clicked
 myNameSpace.startPage.startButtonClicked = function startButtonClicked(){
 	
-	var parentEl;
-	
-	// hide paragraph
-	myNameSpace.startPage.para.style.display = "none";
-	
-	// hide startButton
-	myNameSpace.startPage.startButton.style.display = "none";
+	// hide startPage
+	this.pageIsVisable(false);
 	
 	// show Canvas
 	myNameSpace.canvas.style.display = "block";
-	
-	// get the parent of theDiv
-	parentEl = myNameSpace.theDiv.parentElement;
-	
-	// insert theDiv before the canvas element
-	parentEl.insertBefore(myNameSpace.theDiv, myNameSpace.canvas);
 	
 	// setup first level
 	myNameSpace.levelOne.setUpLevel();

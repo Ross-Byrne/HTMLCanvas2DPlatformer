@@ -5,7 +5,7 @@
 // Setting it up, equals window(the open browser window).myNameSpace to itself if it's there or an empty object if it isn't
 window.myNameSpace = window.myNameSpace || { };
 
-// add pageCreationsTools to namespace
+// add tools to namespace
 window.myNameSpace.tools = { };
 
 

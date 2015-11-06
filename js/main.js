@@ -1,5 +1,6 @@
 // javascript file that holds the main function for the game
 // the game is run from this file
+// the games loop using animation frame is here
 
 // window.myNameSpace is my global object that I can add all of my functions too.
 // Setting it up, equals window(the open browser window).myNameSpace to itself if it's there or an empty object if it isn't
@@ -21,6 +22,12 @@ myNameSpace.levels = [];
 
 // var to keep track of the current level being played
 myNameSpace.currentLevel = 0;
+
+// store the number of levels
+myNameSpace.numberOfLevels = 0;
+
+// keeps track of if the game is over or not
+myNameSpace.isGameOver = false;
 
 
 ////////////////////////////// main() //////////////////////////////
@@ -60,11 +67,14 @@ myNameSpace.main = function main() {
 	// center the divs contents
 	theDiv.style.textAlign = "Center";
 	
+	// load levels and get the number of levels
+	this.numberOfLevels = this.levels.length;
+	
 	// Running Setup Functions
 	
 	// initialise the games start page
-	myNameSpace.startPage.init(theDiv);
-
+	myNameSpace.startPage.init();
+	
 }; // main()
 
 
@@ -259,11 +269,17 @@ myNameSpace.gameOperations = function gameOperations(){
 	
 	// draws the objects to the screen
 	
-	// draw the level
-	myNameSpace.levels[myNameSpace.currentLevel].drawLevel();
-	
-	// draw the player 
-	myNameSpace.thePlayer.draw();
+	if(!myNameSpace.isGameOver){
+		// draw the level
+		myNameSpace.levels[myNameSpace.currentLevel].drawLevel();
+
+		// draw the player 
+		myNameSpace.thePlayer.draw();
+		
+	} else {
+		
+		myNameSpace.gameOverMessage();
+	}
 	
 }; // gameOperations()
 
@@ -289,3 +305,26 @@ myNameSpace.gameLoop = function gameLoop(timeStamp){
 	window.requestAnimationFrame(gameLoop);
 	
 }; // gameLoop()
+
+
+////////////////////////////// gameOverMessage() //////////////////////////////
+
+// function that prints the game over message to the canvas
+myNameSpace.gameOverMessage = function gameOverMessage(){
+
+	// set the font type and size
+	myNameSpace.ctx.font="30px Verdana";
+
+	// center the text
+	myNameSpace.ctx.textAlign = "center";
+	
+	// print first message at center of the canvas
+	myNameSpace.ctx.fillText("Game Over! Press F5 to play again!",
+							 myNameSpace.canvas.width / 2, myNameSpace.canvas.height / 2);
+	
+	// place second message 10% under the first messsage
+	myNameSpace.ctx.fillText("More Levels coming soon!",
+							 (myNameSpace.canvas.width / 2), (myNameSpace.canvas.height / 2) + myNameSpace.canvas.height * .1);
+
+	
+}; // gameOverMessage()

@@ -1,6 +1,7 @@
 // javascript file that holds the code for the first game level
+// code includes an update function that updates the state of the level
 
-// javascript file that holds game objects
+// all floor parts are placed "by hand", using percentages of the canvas width and height
 
 // window.myNameSpace is my global object that I can add all of my functions too.
 // Setting it up, equals window(the open browser window).myNameSpace to itself if it's there or an empty object if it isn't
@@ -120,6 +121,26 @@ myNameSpace.levelOne.update = function update(){
 		
 		// start the walls animation
 		this.movingWall2.isAnimated = true;
+		
+	} // if
+	
+	
+	// if the coin is collected
+	if(this.coin.isCollected){
+		
+		// tigger the next level or game over
+		if(myNameSpace.currentLevel == myNameSpace.numberOfLevels || 
+		  myNameSpace.isGameOver){
+			
+			// if currentLevel was last level, game is over
+			myNameSpace.isGameOver = true;;
+			
+		} else { // if there is another level
+			
+			// load the next level
+			myNameSpace.currentLevel += 1;
+			
+		} // if
 		
 	} // if
 	
