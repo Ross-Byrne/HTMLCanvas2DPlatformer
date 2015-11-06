@@ -43,9 +43,14 @@ myNameSpace.tools.addAttribute = function addAttribute(element, attribute, attri
 }; // addAttribute()
 
 
+////////////////////////////// getDeltaTime() //////////////////////////////
+
 myNameSpace.tools.getDeltaTime = function getDeltaTime(currentTime, lastTime){
 
+	// calculate deltaTime
 	var deltaTime = (currentTime - lastTime) / 1000;
 	
+	// return it
 	return deltaTime;
-};
+	
+}; // getDeltaTime()
