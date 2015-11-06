@@ -30,7 +30,7 @@ myNameSpace.startPage.paraText = "Welcome to Gambler's Gambit." +
 									" You play as a gambler who has sold his soul to the devil for just a few more coins to play in the slot machines!" + 
 									" Your goal is to collect all of the coins." +
 									" Controls: Spacebar is to jump, the left and right Arrow keys are to move left and right, and the up and down Arrow keys are" +
-									" for climbing up and down ladders! Good luck!";
+									" for climbing up and down ladders! Remember, you can only jump on a ladder when you're at the top! Good luck!";
 
 // start button's text
 myNameSpace.startPage.startButtonText = "Play Game";

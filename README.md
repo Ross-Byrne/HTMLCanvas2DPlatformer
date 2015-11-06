@@ -9,6 +9,7 @@ Who needs a soul anyway, when you have some extra coins and a classy top hat?
 ### Controls
 
 To move, the Left and Right Arrow keys move The Gambler left and right. The Up and Down Arrow keys let him climb up and down Ladders.
+Remember, you can only jump on a ladder when you're at the top!
 
 
 ### Aim of The Game
